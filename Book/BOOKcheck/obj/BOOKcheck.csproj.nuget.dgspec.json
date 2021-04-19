@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gorel\\source\\repos\\Book\\BOOKcheck\\BOOKcheck.csproj": {}
+    "E:\\gitte\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gorel\\source\\repos\\Book\\BOOKcheck\\BOOKcheck.csproj": {
+    "E:\\gitte\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gorel\\source\\repos\\Book\\BOOKcheck\\BOOKcheck.csproj",
+        "projectUniqueName": "E:\\gitte\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj",
         "projectName": "BOOKcheck",
-        "projectPath": "C:\\Users\\gorel\\source\\repos\\Book\\BOOKcheck\\BOOKcheck.csproj",
+        "projectPath": "E:\\gitte\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj",
         "packagesPath": "C:\\Users\\gorel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gorel\\source\\repos\\Book\\BOOKcheck\\obj\\",
+        "outputPath": "E:\\gitte\\THEBook\\Book\\BOOKcheck\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gorel\\AppData\\Roaming\\NuGet\\NuGet.Config",
