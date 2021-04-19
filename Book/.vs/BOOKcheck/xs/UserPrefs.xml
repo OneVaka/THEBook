@@ -1,8 +1,10 @@
 ﻿<Properties StartupConfiguration="{A1EF6EF3-F138-4B81-8B83-80B8767F6B73}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="BOOKcheck/Managers/Book/IBookManeger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BOOKcheck/Managers/Book/BookManeger.cs">
     <Files>
-      <File FileName="BOOKcheck/Managers/Book/BookManeger.cs" Line="8" Column="34" />
-      <File FileName="BOOKcheck/Managers/Book/IBookManeger.cs" Line="22" Column="1" />
+      <File FileName="BOOKcheck/Managers/Book/BookManeger.cs" Line="40" Column="36" />
+      <File FileName="BOOKcheck/Managers/Book/IBookManeger.cs" />
+      <File FileName="BOOKcheck/Views/Book/Index.cshtml" />
+      <File FileName="BOOKcheck/Startup.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,14 +13,18 @@
             <Node name="BOOKcheck" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Managers" expanded="True">
-                <Node name="Book" expanded="True" />
+                <Node name="Book" expanded="True">
+                  <Node name="BookManeger.cs" selected="True" />
+                </Node>
               </Node>
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="Storage" expanded="True">
                 <Node name="Entity" expanded="True" />
               </Node>
-              <Node name="lib2.db" selected="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Book" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
