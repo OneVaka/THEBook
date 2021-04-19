@@ -6,10 +6,16 @@ namespace BOOKcheck.Storage.Entity
     {
         ICollection<Book> GetAll();
 
-        ICollection<Book> GetBook(int id);
+        ICollection<Book> GetBook(string name);
 
-        ICollection<Book> GetAutor();
+        ICollection<Book> GetAutor(string name);
 
-        ICollection<Book> GetGenre();
+        ICollection<Book> GetGenre(int id);
+
+        ICollection<Book> DownRating();
+
+        ICollection<Book> UpRating();
+
+        ICollection<Book> PridelRating(double reit1, double reit2);
     }
 }

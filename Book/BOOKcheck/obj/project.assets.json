@@ -4682,26 +4682,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gorel\\.nuget\\packages\\": {}
+    "/Users/petrokhytro/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\gitte\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj",
+      "projectUniqueName": "/Users/petrokhytro/Projects/Git/THEBook/Book/BOOKcheck/BOOKcheck.csproj",
       "projectName": "BOOKcheck",
-      "projectPath": "E:\\gitte\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj",
-      "packagesPath": "C:\\Users\\gorel\\.nuget\\packages\\",
-      "outputPath": "E:\\gitte\\THEBook\\Book\\BOOKcheck\\obj\\",
+      "projectPath": "/Users/petrokhytro/Projects/Git/THEBook/Book/BOOKcheck/BOOKcheck.csproj",
+      "packagesPath": "/Users/petrokhytro/.nuget/packages/",
+      "outputPath": "/Users/petrokhytro/Projects/Git/THEBook/Book/BOOKcheck/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\gorel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/petrokhytro/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4773,7 +4775,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
       }
     }
   }
