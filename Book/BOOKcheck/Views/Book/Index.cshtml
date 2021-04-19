@@ -1,0 +1,28 @@
+﻿@model ICollection<BOOKcheck.Storage.Entity.Book>
+
+    <h1>книги</h1>
+
+    <table>
+        <tr>
+            <th>номер</th>
+            <th>название</th>
+            <th>жанр</th>
+            <th>год</th>
+            <th>рейтинг наш</th>
+            <th>рейтинг мировой</th>
+            <th>автор</th>
+        </tr>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Name</td>
+                <td>@book.Genre.Name</td>
+                <td>@book.Year</td>
+                <td>@book.Rating.OurRating</td>
+                <td>@book.Rating.WorldRating</td>
+                <td>@book.Author.Name</td>
+            </tr>
+        }
+    </table>
+
