@@ -6,6 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="~/css/search.css">
+    <link rel="stylesheet" href="~/css/reset.css">
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,28 +17,32 @@
 
 <body>
         <div class="search">
-            <div class="container">
+            <div class="container1">
                 <h1>Поиск</h1>
                 <div class="search-wrapper">
                     <div class="change">
                         <ul class="list-group">
-                        <div class="select">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Жанры</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                <p> <input type="checkbox" name="a" value="">Любой жанр</p>
-                            </select>
-                        </div>
+                            <div class="select">
+                                <label for="customRange3" class="form-label">Соритировка по:</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Жанры</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                    <p> <input type="checkbox" name="a" value="">Любой жанр</p>
+                                </select>
+                            </div>
                         <div class="select">
                             <input type="text" class="form-control" placeholder="Автор" aria-label="Recipient's username" aria-describedby="basic-addon2">
                             <p><input type="checkbox" name="a" value="">Любой автор</p>
                         </div>
                         <div class="range">
-                            <label for="customRange3" class="form-label">Рейтинг</label>
-                            <input type="text" class="form-control" placeholder="От 0 до 10" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <p><input type="checkbox" name="a" value="">Любой рейтинг</p>
+                            <label style="margin-top: 0px;" for="customRange3" class="form-label">Рейтинг:</label>
+                            <p >От <input style="width: 50%" type="text" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2"> До <input style="width: 50%" type="text" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2"></p>
+                            <label for="customRange3" class="form-label">Сортировать:</label>
+                            <p><input type="radio" name="a1" value="">По возрастанию</p>
+                            <p><input type="radio" name="a1" value="">По убыванию</p>
+                            <p><input type="radio" name="a1" value="">Любой рейтинг</p>
                             <button style="width: 100%;" type="button" class="btn btn-primary">Искать</button>
                         </div>
                          </ul>
@@ -48,16 +53,20 @@
                             <button class="btn btn-info" type="button" id="button-addon2">Найти</button>
                         </div>
                         <nav>
-
-                            <ul style="padding-left: 0; margin: 0 10px;">
-
-                                <li style="margin-top: 10px; list-style: none; padding: 10px; border: 1px solid #ccc; width: 100%; height: 95px; ">Пустое поле для книги</li>
-                                <li style="margin-top: 10px; list-style: none; padding: 10px; border: 1px solid #ccc; width: 40%; "><input class="knopka" type="button" value="Читал"></li>
-                                <li style="margin-top: 10px; list-style: none; padding: 10px; border: 1px solid #ccc; width: 40%; "><input class="knopka" type="button" value="Читаю"></li>
-                                <li style="margin-top: 10px; list-style: none; padding: 10px; border: 1px solid #ccc; width: 40%; "><input class="knopka" type="button" value="Перестал читать"></li>
-                                <li style="margin-top: 10px; list-style: none; padding: 10px; border: 1px solid #ccc; width: 40%; "><input class="knopka" type="button" value="Хочу прочитать"></li>
-
+                            <ul class="list-group">
+                                <div class="select" style="margin-top: 10px; list-style: none; padding: 10px; border: 1px solid #ccc; width: 100%; height: 150px; border-radius:10px; ">
+                                    <li >Пустое поле для книги</li>
+                                    <li>Добавить в:</li>
+                                    <select style="margin-top: 5px; width: 10%;margin-left: 0px;" class="form-select" aria-label="Default select example">
+                                        <option selected>Читал</option>
+                                        <option value="1">Читаю</option>
+                                        <option value="2">Перестал читать</option>
+                                        <option value="3">Хочу прочитать</option>
+                                    </select>
+                                </div>
                             </ul>
+
+                         
 
                         </nav>
                     </div>
