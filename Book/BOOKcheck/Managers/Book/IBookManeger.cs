@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace BOOKcheck.Storage.Entity
 {
     public interface IBookManeger
     {
-        ICollection<Book> GetAll();
+        Task<ICollection<Book>> GetAll();
 
-        ICollection<Book> GetBook(int id);
+        Task<ICollection<Book>> GetBook(string name);
 
-        ICollection<Book> GetAutor();
+        Task<ICollection<Book>> GetAutor(string name);
 
-        ICollection<Book> GetGenre();
+        Task<ICollection<Book>> GetGenre(int id);
+
+        Task<ICollection<Book>> DownRating();
+
+        Task<ICollection<Book>> UpRating();
+
+        Task<ICollection<Book>> PridelRating(double reit1, double reit2);
     }
 }

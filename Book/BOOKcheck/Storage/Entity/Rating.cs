@@ -9,9 +9,9 @@ namespace BOOKcheck.Storage.Entity
         public int Id { get; set; }
 
         
-        public decimal OurRating { get; set; }
+        public double OurRating { get; set; }
 
         
-        public decimal WorldRating { get; set; }
+        public double WorldRating { get; set; }
     }
 }
