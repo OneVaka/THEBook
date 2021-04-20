@@ -24,34 +24,50 @@
                 <div class="change">
                     <ul class="list-group">
                        
-                            <div class="select">
-                                <label for="customRange3" class="form-label">Соритировка по:</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Жанры</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                        <div class="select">
+                            @using (Html.BeginForm("FindGenre", "Search", FormMethod.Post))
+                            {
+                                <label for="customRange3" class="form-label">Сортировка по:</label>
+
+                                <select name="genreID" id="genreID" class="form-select" aria-label="Default select example">
+                                    <option selected value="0"> Любой жанр </option>
+                                    <option value="1">Жанр 1</option>
+                                    <option value="2">Жанр 2</option>
+                                    <option value="3">Жанр 3</option>
+
                                     <p> <input type="checkbox" name="a" value="">Любой жанр</p>
                                 </select>
-                            </div>
+                                <button class="btn btn-info" type="submit" id="button-addon2">Найти</button>
+                            }
+                        </div>
+
                             <div class="select">
 
-                                <input type="text" class="form-control" placeholder="Автор" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                @using (Html.BeginForm("FindAutor", "Search", FormMethod.Post))
+                                {
 
-                                <p><input type="checkbox" name="a" value="">Любой автор</p>
-                                
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="Автор" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    
+                                    <p><input type="checkbox" name="a" value="">Любой автор</p>
+                                }
+
                             </div>
+
                             <div class="range">
 
-                                <label style = "margin-top: 0px;" for= "customRange3" class="form-label">Рейтинг:</label>
-                                <p>От <input style="width: 50%" type="text" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2"> До <input style="width: 50%" type="text" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2"></p>
-                                <label for="customRange3" class="form-label">Сортировать:</label>
-                                <p><input type="radio" name="a1" value="">По возрастанию</p>
-                                <p><input type="radio" name="a1" value="">По убыванию</p>
-                                <p><input type="radio" name="a1" value="">Любой рейтинг</p>
-                                <button style="width: 100%;" type="button" class="btn btn-primary">Искать</button>
+                                @using (Html.BeginForm("FindRating", "Search", FormMethod.Post))
+                                {
 
-                            </div>
+                                    <label style="margin-top: 0px;" for="customRange3" class="form-label">Рейтинг:</label>
+                                    <p>От <input name="rateDown" id="rateDown" style="width: 50%" type="text" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2"> 
+                                        До <input name="rateUpper" id="rateUpper" style="width: 50%" type="text" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2"></p>
+                                    <label for="customRange3" class="form-label">Сортировать:</label>
+                                    <p><input type="radio" name="a1" value="">По возрастанию</p>
+                                    <p><input type="radio" name="a1" value="">По убыванию</p>
+                                    <p><input type="radio" name="a1" value="">Любой рейтинг</p>
+                                    <button style="width: 100%;" type="submit" class="btn btn-primary">Искать</button>
+                                 }
+                                </div>
                        
                         </ul>
                 </div>
@@ -61,13 +77,8 @@
                     {
 
                         <div class="input-group mb-3" style="margin-top: 10px; padding: 10px;">
-
-
-
                             <input name="name" id="name" type="text" class="form-control" placeholder="Искать Книгу" aria-label="Recipient's username" aria-describedby="button-addon2">
                             <button class="btn btn-info" type="submit" id="button-addon2">Найти</button>
-                            
-
                         </div>
                      }
                         <nav>

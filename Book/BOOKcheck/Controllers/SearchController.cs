@@ -12,6 +12,7 @@ namespace BOOKcheck.Controllers
     {
         private readonly ILogger<SearchController> _logger;
         private IBookManeger manager;
+      
 
 
         public SearchController(ILogger<SearchController> logger, IBookManeger manager)
@@ -28,17 +29,15 @@ namespace BOOKcheck.Controllers
 
         public async Task<IActionResult> Search()
         {
-
+            
             var bookTable = await manager.GetAll();
-
             return View(bookTable);
         }
 
         [HttpPost]
-        public async Task<IActionResult> findAutor(string name)
+        public async Task<IActionResult> FindAutor(string name)
         {
-            var bookTable = await manager.GetAutor(name);
-
+           var bookTable = await manager.GetAutor(name);
             return View("Search", bookTable);
         }
 
@@ -46,8 +45,20 @@ namespace BOOKcheck.Controllers
         public async Task<IActionResult> FindBook(string name)
         {
             var bookTable = await manager.GetBook(name);
-            Console.WriteLine("Did FindBook!");
+            return View("Search", bookTable);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> FindGenre(int genreID)
+        {
+            var bookTable = await manager.GetGenre(genreID);
+            return View("Search", bookTable);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FindRating(double rateDown,double rateUpper)
+        {
+            var bookTable = await manager.PridelRating( rateDown,  rateUpper);
             return View("Search", bookTable);
         }
 
