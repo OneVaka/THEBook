@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BOOKcheck.Models;
+using BOOKcheck.Storage.Entity;
 
 namespace BOOKcheck.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IBookManeger manager;
+       
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger , IBookManeger manager)
         {
             _logger = logger;
+            this.manager = manager;
+           
         }
 
         public IActionResult Index()
@@ -23,10 +28,8 @@ namespace BOOKcheck.Controllers
             return View();
         }
 
-        public IActionResult Search()
-        {
-            return View();
-        }
+        
+
         public IActionResult Login()
         {
             return View();

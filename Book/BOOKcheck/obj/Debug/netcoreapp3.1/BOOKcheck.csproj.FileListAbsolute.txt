@@ -604,7 +604,6 @@ E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.c
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Home\Login.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Home\Registr.cshtml.g.cs
-E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Home\Search.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -773,3 +772,4 @@ C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcor
 C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.dll
 C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.pdb
 C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.genruntimeconfig.cache
+E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Search\Search.cshtml.g.cs

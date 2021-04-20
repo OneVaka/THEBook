@@ -41,3 +41,7 @@
     border-radius: 10px;
     margin-left: 5px;
 }
+
+.tap:hover{
+    text-decoration:underline;
+}
