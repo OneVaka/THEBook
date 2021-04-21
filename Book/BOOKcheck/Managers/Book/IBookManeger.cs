@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BOOKcheck.Storage.Entity
+namespace BOOKcheck.Managers.Book
 {
     public interface IBookManeger
     {
-        Task<ICollection<Book>> GetAll();
+        Task<ICollection<Storage.Entity.Book>> GetAll();
 
-        Task<ICollection<Book>> GetBook(string name);
+        Task<ICollection<Storage.Entity.Book>> GetBook(string name);
 
-        Task<ICollection<Book>> GetAutor(string name);
+        Task<ICollection<Storage.Entity.Book>> GetAutor(string name);
 
-        Task<ICollection<Book>> GetGenre(int id);
+        Task<ICollection<Storage.Entity.Book>> GetGenre(int id);
 
-        Task<ICollection<Book>> DownRating();
+        Task<ICollection<Storage.Entity.Book>> DownRating();
 
-        Task<ICollection<Book>> UpRating();
+        Task<ICollection<Storage.Entity.Book>> UpRating();
 
-        Task<ICollection<Book>> PridelRating(double reit1, double reit2);
+        Task<ICollection<Storage.Entity.Book>> PridelRating(double reit1, double reit2);
+
+        Task<ICollection<Storage.Entity.Book>> GetRandomBook();
     }
 }

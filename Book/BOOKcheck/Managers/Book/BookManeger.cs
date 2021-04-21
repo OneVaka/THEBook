@@ -55,6 +55,13 @@ namespace BOOKcheck.Managers.Book
         {
             return await context.Book.Where(r => r.Rating.WorldRating >= rait1).Where(r => r.Rating.WorldRating <= rait2).Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
         }
+
+        public async Task<ICollection<Storage.Entity.Book>> GetRandomBook()
+        {
+            Random ran = new Random();
+            var num = ran.Next(1, context.Book.Max(st => st.Id));
+            return await context.Book.Where(bk => bk.Id == num).Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
+        }
     }
 
 

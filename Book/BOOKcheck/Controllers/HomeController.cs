@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BOOKcheck.Models;
 using BOOKcheck.Storage.Entity;
+using BOOKcheck.Managers.Book;
 
 namespace BOOKcheck.Controllers
 {
