@@ -53,6 +53,9 @@ namespace BOOKcheck.Managers.Book
         //взятие промежутка
         public async Task<ICollection<Storage.Entity.Book>> PridelRating(double rait1, double rait2)
         {
+            if(rait1==0 && rait2==0)
+                return await context.Book.Where(r => r.Rating.WorldRating >= 0).Where(r => r.Rating.WorldRating <= 10).Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
+
             return await context.Book.Where(r => r.Rating.WorldRating >= rait1).Where(r => r.Rating.WorldRating <= rait2).Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
         }
 

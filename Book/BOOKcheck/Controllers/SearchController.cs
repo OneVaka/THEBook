@@ -47,6 +47,7 @@ namespace BOOKcheck.Controllers
         {
             var bookTable = await manager.GetBook(name);
             return View("Search", bookTable);
+           
         }
 
         [HttpPost]
