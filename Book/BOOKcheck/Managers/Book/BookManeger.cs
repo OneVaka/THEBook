@@ -35,8 +35,8 @@ namespace BOOKcheck.Managers.Book
         //поиск по жанру
         public async Task<ICollection<Storage.Entity.Book>> GetGenre(int id)
         {
-            if(id==0)
-                return await context.Book.Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
+            if (id == 0)
+                return await GetAll();
 
             return await context.Book.Where(bk => bk.IdGenre == id).Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
         }
