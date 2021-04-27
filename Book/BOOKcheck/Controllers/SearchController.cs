@@ -13,8 +13,6 @@ namespace BOOKcheck.Controllers
     {
         private readonly ILogger<SearchController> _logger;
         private IBookManeger manager;
-      
-
 
         public SearchController(ILogger<SearchController> logger, IBookManeger manager)
         {
