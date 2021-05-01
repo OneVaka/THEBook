@@ -1,24 +1,26 @@
 ﻿<Properties StartupConfiguration="{A1EF6EF3-F138-4B81-8B83-80B8767F6B73}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="BOOKcheck/Managers/Book/IBookManeger.cs">
-    <Files>
-      <File FileName="BOOKcheck/Managers/Book/BookManeger.cs" Line="8" Column="34" />
-      <File FileName="BOOKcheck/Managers/Book/IBookManeger.cs" Line="22" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="BOOKcheck" expanded="True">
             <Node name="BOOKcheck" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="BookController.cs" selected="True" />
+              </Node>
               <Node name="Managers" expanded="True">
                 <Node name="Book" expanded="True" />
+                <Node name="Liber" expanded="True" />
               </Node>
-              <Node name="Models" expanded="True" />
-              <Node name="Properties" expanded="True" />
+              <Node name="Migrations" expanded="True">
+                <Node name="20210416200349_InitialCreate.cs" expanded="True" />
+                <Node name="20210420235654_Libb.cs" expanded="True" />
+              </Node>
               <Node name="Storage" expanded="True">
                 <Node name="Entity" expanded="True" />
+                <Node name="Lib" expanded="True" />
+                <Node name="User" expanded="True" />
               </Node>
-              <Node name="lib2.db" selected="True" />
             </Node>
           </Node>
         </State>

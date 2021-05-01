@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BOOKcheck.Managers.Book;
+using BOOKcheck.Managers.Liber;
 using BOOKcheck.Storage;
 using BOOKcheck.Storage.Entity;
 using Microsoft.AspNetCore.Builder;
@@ -30,9 +31,10 @@ namespace BOOKcheck
             services.AddControllersWithViews();
 
             //!!!надо записать в другое место  
-            services.AddDbContext<BookContext>(options => options.UseSqlite("Data Source = lib2.db"));
+            services.AddDbContext<UniversalContext>(options => options.UseSqlite("Data Source = lib2.db"));
 
             services.AddTransient<IBookManeger,BookManeger>();
+            services.AddTransient<ILiberManager, LiberManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +64,7 @@ namespace BOOKcheck
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //serviceProvider.GetService<BookContext>().Database.EnsureCreated();
+            
         }
     }
 }

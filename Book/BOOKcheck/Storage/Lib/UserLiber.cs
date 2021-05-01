@@ -10,17 +10,21 @@ namespace BOOKcheck.Storage.Lib
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
+        //1
         [OneToMany]
-        public List<EndRead> EndRead { get; set; }
+        public List<EndRead> EndRead { get; set; } = new List<EndRead>();
 
+        //2
         [OneToMany]
-        public List<FinishRead> FinishRead { get; set; }
+        public List<FinishRead> FinishRead { get; set; } = new List<FinishRead>();
 
+        //3
         [OneToMany]
-        public List<NowRead> NowRead { get; set; }
+        public List<NowRead> NowRead { get; set; } = new List<NowRead>();
 
+        //4
         [OneToMany]
-        public List<WantRead> WantRead { get; set; }
+        public List<WantRead> WantRead { get; set; } = new List<WantRead>();
 
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BOOKcheck.Migrations
 {
-    [DbContext(typeof(BookContext))]
+    [DbContext(typeof(UniversalContext))]
     [Migration("20210420235654_Libb")]
     partial class Libb
     {
