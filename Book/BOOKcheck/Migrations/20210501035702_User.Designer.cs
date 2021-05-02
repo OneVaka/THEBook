@@ -3,14 +3,16 @@ using System;
 using BOOKcheck.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BOOKcheck.Migrations
 {
-    [DbContext(typeof(BookContext))]
-    partial class BookContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(UniversalContext))]
+    [Migration("20210501035702_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,6 +275,34 @@ namespace BOOKcheck.Migrations
                     b.ToTable("WantRead");
                 });
 
+            modelBuilder.Entity("BOOKcheck.Storage.User.Person", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdUserLiber")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Login")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Pass")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("UserLiberId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserLiberId");
+
+                    b.ToTable("Person");
+                });
+
             modelBuilder.Entity("BOOKcheck.Storage.Entity.Book", b =>
                 {
                     b.HasOne("BOOKcheck.Storage.Entity.Author", "Author")
@@ -304,13 +334,15 @@ namespace BOOKcheck.Migrations
                         .WithMany()
                         .HasForeignKey("PageId");
 
-                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", null)
+                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", "UserLiber")
                         .WithMany("EndRead")
                         .HasForeignKey("UserLiberId");
 
                     b.Navigation("Book");
 
                     b.Navigation("Page");
+
+                    b.Navigation("UserLiber");
                 });
 
             modelBuilder.Entity("BOOKcheck.Storage.Lib.FinishRead", b =>
@@ -323,13 +355,15 @@ namespace BOOKcheck.Migrations
                         .WithMany()
                         .HasForeignKey("PageId");
 
-                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", null)
+                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", "UserLiber")
                         .WithMany("FinishRead")
                         .HasForeignKey("UserLiberId");
 
                     b.Navigation("Book");
 
                     b.Navigation("Page");
+
+                    b.Navigation("UserLiber");
                 });
 
             modelBuilder.Entity("BOOKcheck.Storage.Lib.NowRead", b =>
@@ -342,13 +376,15 @@ namespace BOOKcheck.Migrations
                         .WithMany()
                         .HasForeignKey("PageId");
 
-                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", null)
+                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", "UserLiber")
                         .WithMany("NowRead")
                         .HasForeignKey("UserLiberId");
 
                     b.Navigation("Book");
 
                     b.Navigation("Page");
+
+                    b.Navigation("UserLiber");
                 });
 
             modelBuilder.Entity("BOOKcheck.Storage.Lib.WantRead", b =>
@@ -361,13 +397,24 @@ namespace BOOKcheck.Migrations
                         .WithMany()
                         .HasForeignKey("PageId");
 
-                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", null)
+                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", "UserLiber")
                         .WithMany("WantRead")
                         .HasForeignKey("UserLiberId");
 
                     b.Navigation("Book");
 
                     b.Navigation("Page");
+
+                    b.Navigation("UserLiber");
+                });
+
+            modelBuilder.Entity("BOOKcheck.Storage.User.Person", b =>
+                {
+                    b.HasOne("BOOKcheck.Storage.Lib.UserLiber", "UserLiber")
+                        .WithMany()
+                        .HasForeignKey("UserLiberId");
+
+                    b.Navigation("UserLiber");
                 });
 
             modelBuilder.Entity("BOOKcheck.Storage.Lib.UserLiber", b =>

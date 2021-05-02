@@ -22,5 +22,6 @@ namespace BOOKcheck.Storage.Lib
 
         [ForeignKey(typeof(UserLiber))]
         public int IdUserLiber { get; set; }
+        public UserLiber UserLiber { get; set; }
     }
 }

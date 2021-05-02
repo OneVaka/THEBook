@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BOOKcheck.Migrations
 {
-    [DbContext(typeof(BookContext))]
+    [DbContext(typeof(UniversalContext))]
     [Migration("20210416200349_InitialCreate")]
     partial class InitialCreate
     {
