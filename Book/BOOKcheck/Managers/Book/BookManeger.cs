@@ -19,8 +19,6 @@ namespace BOOKcheck.Managers.Book
         //вывод всей библиотеки
         public async Task<ICollection<Storage.Entity.Book>> GetAll()
         {
-            var a= context.Book.Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
-
             return await context.Book.Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
         }
 

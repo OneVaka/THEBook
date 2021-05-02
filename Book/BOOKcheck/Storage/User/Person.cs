@@ -15,7 +15,9 @@ namespace BOOKcheck.Storage.User
 
         public string Pass { get; set; }
 
-        public string Name { get; set; }
+        public string Mail { get; set; }
+
+        public string Cookies { get; set; }
 
         [ForeignKey(typeof(UserLiber))]
         public int IdUserLiber { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BOOKcheck.Managers.Book;
 using BOOKcheck.Managers.Liber;
+using BOOKcheck.Managers.User;
 using BOOKcheck.Storage;
 using BOOKcheck.Storage.Entity;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,8 @@ namespace BOOKcheck
 
             services.AddTransient<IBookManeger,BookManeger>();
             services.AddTransient<ILiberManager, LiberManager>();
+            services.AddTransient<IPersonManager, IPersonManager>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

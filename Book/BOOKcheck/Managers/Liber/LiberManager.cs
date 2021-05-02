@@ -311,43 +311,43 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //вывод
-        public ICollection<UserLiber> GetAllEnd(int IdUser)
+        public async Task<ICollection<UserLiber>> GetAllEnd(int IdUser)
         {
-            return Proverka(IdUser)
+            return await Proverka(IdUser)
                                    .Include(end => end.EndRead).ThenInclude(end => end.Book).ThenInclude(book => book.Author)
                                    .Include(end => end.EndRead).ThenInclude(end => end.Book).ThenInclude(book => book.Genre)
                                    .Include(end => end.EndRead).ThenInclude(end => end.Book).ThenInclude(book => book.Rating)
-                                   .Include(end => end.EndRead).ThenInclude(end => end.Page).ToList();
+                                   .Include(end => end.EndRead).ThenInclude(end => end.Page).ToListAsync();
         }
 
         //вывод
-        public ICollection<UserLiber> GetAllFinish(int IdUser)
+        public async Task<ICollection<UserLiber>> GetAllFinish(int IdUser)
         {
-            return Proverka(IdUser)
+            return await Proverka(IdUser)
                                    .Include(end => end.FinishRead).ThenInclude(end => end.Book).ThenInclude(book => book.Author)
                                    .Include(end => end.FinishRead).ThenInclude(end => end.Book).ThenInclude(book => book.Genre)
                                    .Include(end => end.FinishRead).ThenInclude(end => end.Book).ThenInclude(book => book.Rating)
-                                   .Include(end => end.FinishRead).ThenInclude(end => end.Page).ToList();
+                                   .Include(end => end.FinishRead).ThenInclude(end => end.Page).ToListAsync();
         }
 
         //вывод
-        public ICollection<UserLiber> GetAllNow(int IdUser)
+        public async Task<ICollection<UserLiber>> GetAllNow(int IdUser)
         {
-            return Proverka(IdUser)
+            return await Proverka(IdUser)
                                    .Include(end => end.NowRead).ThenInclude(end => end.Book).ThenInclude(book => book.Author)
                                    .Include(end => end.NowRead).ThenInclude(end => end.Book).ThenInclude(book => book.Genre)
                                    .Include(end => end.NowRead).ThenInclude(end => end.Book).ThenInclude(book => book.Rating)
-                                   .Include(end => end.NowRead).ThenInclude(end => end.Page).ToList();
+                                   .Include(end => end.NowRead).ThenInclude(end => end.Page).ToListAsync();
         }
 
         //вывод
-        public ICollection<UserLiber> GetAllWant(int IdUser)
+        public async Task<ICollection<UserLiber>> GetAllWant(int IdUser)
         {
-            return Proverka(IdUser)
+            return await Proverka(IdUser)
                                    .Include(end => end.WantRead).ThenInclude(end => end.Book).ThenInclude(book => book.Author)
                                    .Include(end => end.WantRead).ThenInclude(end => end.Book).ThenInclude(book => book.Genre)
                                    .Include(end => end.WantRead).ThenInclude(end => end.Book).ThenInclude(book => book.Rating)
-                                   .Include(end => end.WantRead).ThenInclude(end => end.Page).ToList();
+                                   .Include(end => end.WantRead).ThenInclude(end => end.Page).ToListAsync();
         }
 
 
