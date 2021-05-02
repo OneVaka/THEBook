@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
 namespace BOOKcheck.Managers.Book
 {
     public interface IBookManeger
@@ -19,7 +20,5 @@ namespace BOOKcheck.Managers.Book
         Task<ICollection<Storage.Entity.Book>> UpRating();
 
         Task<ICollection<Storage.Entity.Book>> PridelRating(double reit1, double reit2);
-
-        Task<ICollection<Storage.Entity.Book>> GetRandomBook();
     }
 }

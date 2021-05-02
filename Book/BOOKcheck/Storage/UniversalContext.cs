@@ -1,15 +1,22 @@
-﻿//накидать что то похожие на это
-/*
-using System;
+﻿using System;
 using BOOKcheck.Storage.Entity;
 using BOOKcheck.Storage.Lib;
+using BOOKcheck.Storage.User;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace BOOKcheck.Storage
 {
-    public class LiberContext : DbContext
+    public class UniversalContext : DbContext
     {
+        public DbSet<Book> Book { get; set; }
+
+        public DbSet<Author> Author { get; set; }
+           
+        public DbSet<Genre> Genre { get; set; }
+
+        public DbSet<Rating> Rating { get; set; }
+        
         public DbSet<Page> Page { get; set; }
 
         public DbSet<EndRead> EndRead { get; set; }
@@ -22,11 +29,12 @@ namespace BOOKcheck.Storage
 
         public DbSet<UserLiber> UserLiber { get; set; }
 
-        public LiberContext(DbContextOptions<LiberContext> options) : base(options)
+        public DbSet<Person> Person { get; set; }
+
+        public UniversalContext (DbContextOptions<UniversalContext> options):base (options)
         {
 
         }
 
     }
 }
-*/

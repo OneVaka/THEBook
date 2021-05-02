@@ -1,0 +1,31 @@
+﻿@model ICollection<BOOKcheck.Storage.Lib.UserLiber>
+
+    <h1>LIBER</h1>
+
+    <table>
+        <tr>
+            <th>номер</th>
+            <th>название</th>
+            <th>жанр</th>
+            <th>год</th>
+            <th>рейтинг наш</th>
+            <th>рейтинг мировой</th>
+            <th>автор</th>
+        </tr>
+        @foreach (var userLiber in Model)
+        {
+            @foreach (var end in userLiber.EndRead)
+            {
+            <tr>
+                <td>@end.Book.Id</td>
+                <td>@end.Book.Name</td>
+                <td>@end.Book.Genre.Name</td>
+                <td>@end.Book.Year</td>
+                <td>@end.Book.Rating.OurRating</td>
+                <td>@end.Book.Rating.WorldRating</td>
+                <td>@end.Book.Author.Name</td>
+            </tr>
+            }
+        }
+    </table>
+
