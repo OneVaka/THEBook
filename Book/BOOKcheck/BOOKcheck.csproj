@@ -9,7 +9,6 @@
     <Folder Include="Storage\Entity\" />
     <Folder Include="Managers\" />
     <Folder Include="Managers\Book\" />
-    <Folder Include="Views\Book\" />
     <Folder Include="Storage\User\" />
     <Folder Include="Managers\User\" />
   </ItemGroup>

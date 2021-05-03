@@ -17,6 +17,7 @@ namespace BOOKcheck.Controllers
 
         public BookController(IBookManeger maneger)
         {
+
             this.maneger = maneger;
             
         }
@@ -27,5 +28,7 @@ namespace BOOKcheck.Controllers
             var book = await maneger.GetAll();
             return  View(book);
         }
+
+      
     }
 }

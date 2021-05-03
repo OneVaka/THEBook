@@ -14,15 +14,17 @@ namespace BOOKcheck.Controllers
             this.manager = manager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var lib = manager.GetAllEnd(1);
+            var lib = await manager.GetAllEnd(1);
 
             manager.RemoveBook(1,5);
 
             return View(lib);
         }
 
-        
+
+       
+
     }
 }

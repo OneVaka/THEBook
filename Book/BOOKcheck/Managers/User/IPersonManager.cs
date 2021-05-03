@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 
 namespace BOOKcheck.Managers.User
 {
     public interface IPersonManager
     {
-        public void AddUser();
+        public bool CheckCookie(string userCookie);
 
-        public int AddLiber();
+        public bool UserLogOut(ControllerContext controllerContext);
 
-        public int GetIdLiber(int IdUser);
+        public bool LogInUser(string Login, string Pass, ControllerContext controllerContext);
+
+        public bool AddUser(string Mail,string Pass, string Login, ControllerContext controllerContext);
+
     }
 }

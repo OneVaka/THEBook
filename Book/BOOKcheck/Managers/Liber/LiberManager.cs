@@ -33,6 +33,7 @@ namespace BOOKcheck.Managers.Liber
             }
             return p;
         }
+
         //удаляет книгу из Finish
         public int RemoveBookFinish(int IdBook)
         {
@@ -107,69 +108,7 @@ namespace BOOKcheck.Managers.Liber
             }
         }
 
-        //добавление книги в любую категорию 
-        public void AddBookLiber(int IdUser, int IdBook,int flagLiber)
-        {
-            var l = Proverka(IdUser);
-            int f,p=0;
-
-            if (l != null)
-            {
-                f = BookCategory(IdUser, IdBook);
-                
-                if (f != 0)
-                {
-                    switch (f)
-                    {
-                        case 1:
-                            p=RemoveBookEnd(IdBook);
-                            break;
-
-                        case 2:
-                            p=RemoveBookFinish(IdBook);
-                            break;
-
-                        case 3:
-                            p=RemoveBookNow(IdBook);
-                            break;
-
-                        case 4:
-                            p=RemoveBookWant(IdBook);
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-
-                switch (flagLiber)
-                {
-                    case 1:
-                        AddBookEnd(IdUser, IdBook, p);
-                        break;
-
-                    case 2:
-                        AddBookFinish(IdUser, IdBook, p);
-                        break;
-
-                    case 3:
-                        AddBookNow(IdUser, IdBook, p);
-                        break;
-
-                    case 4:
-                        AddBookWant(IdUser, IdBook, p);
-                        break;
-
-                    default:
-                        break;
-
-                }
-            }
-                
-        }
-
-
-        //добавить стрпницу
+        //добавить страницу
         public int AddPage(int numberPage)
         {
             Page page = new Page();
@@ -245,19 +184,12 @@ namespace BOOKcheck.Managers.Liber
             end.IdUserLiber = IdUser;
             end.Page = context.Page.FirstOrDefault(p => p.Id == idPage);
             end.Book = context.Book.FirstOrDefault(b => b.Id == IdBook);
+
             end.UserLiber = context.UserLiber.FirstOrDefault(u => u.Id == IdUser);
 
             context.EndRead.Add(end);
             context.SaveChanges();
 
-        }
-
-        // проверка на User
-        public IQueryable<Storage.Lib.UserLiber> Proverka(int IdUser)
-        {
-            var p = context.UserLiber.Where(t => t.Id == IdUser);
-
-            return p;
         }
 
         //поиск где находится книга возвращает флаг флаги смотреть в классе UserLiber
@@ -308,6 +240,74 @@ namespace BOOKcheck.Managers.Liber
                     UserRating.Rating.OurRating = ((UserRating.Rating.OurRating + appraisal) / 2);
                 context.SaveChanges();
             }
+        }
+
+        //добавление книги в любую категорию 
+        public void AddBookLiber(int IdUser, int IdBook,int flagLiber)
+        {
+            var l = Proverka(IdUser);
+            int f,p=0;
+
+            if (l != null)
+            {
+                f = BookCategory(IdUser, IdBook);
+                
+                if (f != 0)
+                {
+                    switch (f)
+                    {
+                        case 1:
+                            p=RemoveBookEnd(IdBook);
+                            break;
+
+                        case 2:
+                            p=RemoveBookFinish(IdBook);
+                            break;
+
+                        case 3:
+                            p=RemoveBookNow(IdBook);
+                            break;
+
+                        case 4:
+                            p=RemoveBookWant(IdBook);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                switch (flagLiber)
+                {
+                    case 1:
+                        AddBookEnd(IdUser, IdBook, p);
+                        break;
+
+                    case 2:
+                        AddBookFinish(IdUser, IdBook, p);
+                        break;
+
+                    case 3:
+                        AddBookNow(IdUser, IdBook, p);
+                        break;
+
+                    case 4:
+                        AddBookWant(IdUser, IdBook, p);
+                        break;
+
+                    default:
+                        break;
+
+                }
+            }
+                
+        }
+        // проверка на User
+        public IQueryable<Storage.Lib.UserLiber> Proverka(int IdUser)
+        {
+            var p = context.UserLiber.Where(t => t.Id == IdUser);
+
+            return p;
         }
 
         //вывод
