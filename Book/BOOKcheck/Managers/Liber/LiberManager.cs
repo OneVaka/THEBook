@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BOOKcheck.Storage;
 using BOOKcheck.Storage.Lib;
+using BOOKcheck.Storage.Entity;
 using Microsoft.EntityFrameworkCore;
-
+using BOOKcheck.Storage.User;
 
 namespace BOOKcheck.Managers.Liber
 {
@@ -19,30 +20,38 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //удаляет книгу из End
-        public int RemoveBookEnd(int IdBook)
+        public int RemoveBookEnd(int IdBook, int IdUser)
         {
             int p=0;
-            var end = context.EndRead.FirstOrDefault(e => e.IdBook == IdBook);
+            var end = context.EndRead.FirstOrDefault(b => b.IdBook == IdBook && b.IdUserLiber == IdUser);   //должна быть книга из библиотеки определенного пользователя
             if (end != null)
             {
-                var pageEnd = end.Page;
-                p = pageEnd.Number;
-                context.Page.Remove(pageEnd);
+                var pageEnd = context.Page.FirstOrDefault(pg => pg.Id == end.IdPage);
+
+                if (pageEnd != null)
+                    context.Page.Remove(pageEnd);
+                
                 context.EndRead.Remove(end);
                 context.SaveChanges();
             }
             return p;
         }
 
+        //pageFinish не должен быть null!!
+
         //удаляет книгу из Finish
-        public int RemoveBookFinish(int IdBook)
+        public int RemoveBookFinish(int IdBook, int IdUser)
         {
             int p = 0;
-            var finish = context.FinishRead.FirstOrDefault(b => b.IdBook == IdBook);
+            var finish = context.FinishRead.FirstOrDefault(b => b.IdBook == IdBook && b.IdUserLiber == IdUser);//&& b.IdUserLiber == IdUser
+            
             if (finish != null)
             {
-                var pageFinish = finish.Page;
-                context.Page.Remove(pageFinish);
+                var pageFinish = context.Page.FirstOrDefault(pg => pg.Id == finish.IdPage);
+
+                if(pageFinish != null) 
+                    context.Page.Remove(pageFinish);
+
                 context.FinishRead.Remove(finish);
                 context.SaveChanges();
             }
@@ -50,14 +59,17 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //удаляет книгу из Now
-        public int RemoveBookNow(int IdBook)
+        public int RemoveBookNow(int IdBook, int IdUser)
         {
             int p = 0;
-            var now = context.NowRead.FirstOrDefault(b => b.IdBook == IdBook);
+            var now = context.NowRead.FirstOrDefault(b => b.IdBook == IdBook && b.IdUserLiber == IdUser);
             if (now != null)
             {
-                var pageNow = now.Page;
-                context.Page.Remove(pageNow);
+                var pageNow = context.Page.FirstOrDefault(pg => pg.Id == now.IdPage);
+
+                if(pageNow != null)
+                   context.Page.Remove(pageNow);
+
                 context.NowRead.Remove(now);
                 context.SaveChanges();
             }
@@ -65,20 +77,24 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //удаляет книгу из Want
-        public int RemoveBookWant(int IdBook)
+        public int RemoveBookWant(int IdBook,int IdUser)
         {
             int p = 0;
-            var want = context.WantRead.FirstOrDefault(b => b.IdBook == IdBook);
+            var want = context.WantRead.FirstOrDefault(b => b.IdBook == IdBook && b.IdUserLiber == IdUser);
             if (want != null)
             {
-                var pageWant = want.Page;
-                context.Page.Remove(pageWant);
+                var pageWant = context.Page.FirstOrDefault(pg => pg.Id == want.IdPage);
+                
+                if(pageWant != null)
+                    context.Page.Remove(pageWant);
+
+                context.WantRead.Remove(want);
                 context.SaveChanges();
             }
             return p;
         }
 
-        //просто удаляет кингу по Id книге
+        //просто удаляет кингу по Id книги
         public void RemoveBook(int IdUser, int IdBook)
         {
             var liber = Proverka(IdUser);
@@ -90,16 +106,16 @@ namespace BOOKcheck.Managers.Liber
                 switch (f)
                 {
                     case 1:
-                        RemoveBookEnd(IdBook);
+                        RemoveBookEnd(IdBook,IdUser);
                         break;
                     case 2:
-                        RemoveBookFinish(IdBook);
+                        RemoveBookFinish(IdBook, IdUser);
                         break;
                     case 3:
-                        RemoveBookNow(IdBook);
+                        RemoveBookNow(IdBook, IdUser);
                         break;
                     case 4:
-                        RemoveBookWant(IdBook);
+                        RemoveBookWant(IdBook, IdUser);
                         break;
 
                     default:
@@ -257,19 +273,19 @@ namespace BOOKcheck.Managers.Liber
                     switch (f)
                     {
                         case 1:
-                            p=RemoveBookEnd(IdBook);
+                            p=RemoveBookEnd(IdBook, IdUser);
                             break;
 
                         case 2:
-                            p=RemoveBookFinish(IdBook);
+                            p=RemoveBookFinish(IdBook, IdUser);
                             break;
 
                         case 3:
-                            p=RemoveBookNow(IdBook);
+                            p=RemoveBookNow(IdBook, IdUser);
                             break;
 
                         case 4:
-                            p=RemoveBookWant(IdBook);
+                            p=RemoveBookWant(IdBook, IdUser);
                             break;
 
                         default:
@@ -310,9 +326,41 @@ namespace BOOKcheck.Managers.Liber
             return p;
         }
 
+
+
+
+       public async Task<ICollection<UserLiber>> GetUserLib(int choice,string userLogin)
+       {
+
+
+               var user = context.Person.FirstOrDefault(st => st.Login == userLogin);
+
+            switch (choice)
+           {
+               case 1:
+                   return await GetAllNow(user.Id);
+                  
+               case 2:
+                    return await GetAllFinish(user.Id);
+                    
+               case 3:
+                    return await GetAllWant(user.Id);
+                    
+               case 4:
+                    return await GetAllEnd(user.Id);
+                   
+            }
+            return null; 
+       
+       
+       }
+
+
         //вывод
         public async Task<ICollection<UserLiber>> GetAllEnd(int IdUser)
         {
+
+
             return await Proverka(IdUser)
                                    .Include(end => end.EndRead).ThenInclude(end => end.Book).ThenInclude(book => book.Author)
                                    .Include(end => end.EndRead).ThenInclude(end => end.Book).ThenInclude(book => book.Genre)
@@ -320,6 +368,7 @@ namespace BOOKcheck.Managers.Liber
                                    .Include(end => end.EndRead).ThenInclude(end => end.Page).ToListAsync();
         }
 
+       
         //вывод
         public async Task<ICollection<UserLiber>> GetAllFinish(int IdUser)
         {

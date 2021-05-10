@@ -1,0 +1,116 @@
+﻿@*model ICollection<BOOKcheck.Storage.Lib.UserLiber>*@
+@model ICollection<UserLibModel>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/css/login.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>Login</title>
+
+    <style>
+        table {
+            color:black;
+            font: 14px/1.5 sans-serif;
+            counter-reset: count;
+        }
+
+        table td:first-child:before {
+                    content: counter(count);
+                    counter-increment: count;
+                   
+                    margin-right: 1em;
+        }
+
+                
+    </style>
+
+</head>
+
+<body class="color1">
+    <div class="login" >
+        <div class="container">
+            <h1 class="mt-5" style="text-align:center">Библиотека: User</h1>
+            <div class="block mt-5" >
+                <div class="select">
+                    <form method="post" action="/UserPage/getLib">
+                        <select class="form-select form-select-lg mb-1" aria-label=".form-select-lg example" onchange="this.form.submit()" name="libOption">
+                            <option selected hidden>Книги</option>
+                            <option value="1">Читаю </option>
+                            <option value="2">Прочитал</option>
+                            <option value="3">Хочу читать</option>
+                            <option value="4">Перестал читать</option>
+                        </select>
+                    </form>
+
+                    <button style="width: 100%;" type="button" class="btn btn-warning mt-3">Случайная книга</button>
+
+                    <form  method="post" action="/UserPage/LogOut">
+
+                        <button style="width: 100%" class="btn btn-warning mt-3" type="submit">Выйти </button>
+
+                    </form>
+                </div>
+                <div class="info"> 
+
+                    <table style="width: 100%; ">
+
+                        @if (Model.Count == 0)
+                        {
+                            <tr>
+
+                                <td colspan="7" style="font-size:18px; padding-left: 15px">Данный список пуст!</td>
+
+                            </tr>
+                        }
+                        @if (Model.Count != 0)
+                        @foreach (var userLiber in Model)
+                         {
+                            
+                            
+                                <tr style="height:max-content">
+                                 
+
+                                    <td><a style="text-decoration:none; color:black;" href="/Book/@userLiber.Book.Id">@userLiber.Book.Name</a></td>
+                                    <td>@userLiber.Book.Genre.Name</td>
+                                    <td>@userLiber.Book.Year</td>
+                                    <td>@userLiber.Book.Author.Name</td>
+                                    <td style="text-align:center">@userLiber.Book.Rating.OurRating</td>
+                                    <td style="text-align:center">@userLiber.Book.Rating.WorldRating</td>
+                                    
+                                    <td style="text-align:center">@userLiber.Page.Number</td>
+                                    
+                                </tr>
+                            
+                         }
+
+                    </table>
+                  
+                    <nav>
+                        <ul>
+                            <li style="height: auto">
+                                <p style="color: black">Для читаю: Введите номер страницы на которой вы остановилиь <input style="width: 15%;" type="text" size="40" placeholder="Номер страница"><button style="width: 100px;" type="button" class="btn btn-primary">Добавить</button></p>
+                                <p style="color: black"><input type="radio" name="a1" value=""> Ометить как прочитанное</p>
+                                <p style="color: black"><input type="radio" name="a1" value=""> Отметить как перестал(а) читать</p>
+                            </li>
+                            <li>
+                                <p style="color: black; height: auto">Для прочитал: Введите рейтинг для прочитанной книги <input style="width: 15%;" type="text" size="40" placeholder="Рейтинг"><button style="width: 100px;" type="button" class="btn btn-primary">Добавить</button></p>
+                            </li>
+                            <li>
+                                <p style="color: black; height: auto">Поле для вывода случайной книги <button style="width: 150px; margin-bottom: 2px" type="button" class="btn btn-primary">Сгенерировать</button></p>
+                                <div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

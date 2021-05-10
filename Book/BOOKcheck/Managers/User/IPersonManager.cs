@@ -6,9 +6,9 @@ namespace BOOKcheck.Managers.User
 {
     public interface IPersonManager
     {
-        public bool CheckCookie(string userCookie);
+        public int GetIdLiber(string Login);
 
-        public bool UserLogOut(ControllerContext controllerContext);
+        public bool CheckCookie(string userCookie);
 
         public bool LogInUser(string Login, string Pass, ControllerContext controllerContext);
 

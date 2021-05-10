@@ -913,8 +913,6 @@ E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.TagHelpers.out
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.RazorCoreGenerate.cache
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Home\Login.cshtml.g.cs
-E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Lib\Index.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Search\Search.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -929,5 +927,8 @@ E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.dll
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.pdb
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.genruntimeconfig.cache
 E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.csprojAssemblyReference.cache
-E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Bookstr.cshtml.g.cs
-E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Registration.cshtml.g.cs
+E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\Index.cshtml.g.cs
+E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\UserPage\IndexArtur.cshtml.g.cs
+E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Authorization\Index.cshtml.g.cs
+E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Search\_GetBookTable.cshtml.g.cs
+E:\gitte\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Book\Bookstr.cshtml.g.cs

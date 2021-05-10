@@ -14,7 +14,9 @@ namespace BOOKcheck.Managers.Liber
         Task<ICollection<Storage.Lib.UserLiber>> GetAllNow(int IdUser);
 
         Task<ICollection<Storage.Lib.UserLiber>> GetAllFinish(int IdUser);
-        
+
+        Task<ICollection<Storage.Lib.UserLiber>> GetUserLib(int choice, string userLogin);
+
         //измение
         public void ChangePageNumber(int IdBook, int IdLiber, int PageNumber);
 
@@ -27,16 +29,16 @@ namespace BOOKcheck.Managers.Liber
         public void RemoveBook(int IdUser, int IdBook);
 
         //удаляет книгу из End
-        public int RemoveBookEnd(int IdBook);
+        public int RemoveBookEnd(int IdBook, int IdUser);
 
         //удаляет книгу из Finish
-        public int RemoveBookFinish(int IdBook);
+        public int RemoveBookFinish(int IdBook, int IdUser);
 
         //удаляет книгу из Now
-        public int RemoveBookNow(int IdBook);
+        public int RemoveBookNow(int IdBook, int IdUser);
 
         //удаляет книгу из Want
-        public int RemoveBookWant(int IdBook);
+        public int RemoveBookWant(int IdBook, int IdUser);
 
         //добавление книги в любую категорию 
         public void AddBookLiber(int IdUser, int IdBook, int flagLiber);

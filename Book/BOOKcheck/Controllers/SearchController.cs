@@ -26,6 +26,7 @@ namespace BOOKcheck.Controllers
             return View();
         }
 
+        [Route("Search")]
         public async Task<IActionResult> Search()
         {
             
@@ -33,34 +34,46 @@ namespace BOOKcheck.Controllers
             return View(bookTable);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> FindAutor(string name)
         {
+           
            var bookTable = await manager.GetAutor(name);
             return View("Search", bookTable);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> FindBook(string name)
         {
             var bookTable = await manager.GetBook(name);
             return View("Search", bookTable);
-           
+
+
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> FindGenre(int genreID)
         {
             var bookTable = await manager.GetGenre(genreID);
             return View("Search", bookTable);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> FindRating(double rateDown,double rateUpper)
         {
             var bookTable = await manager.PridelRating( rateDown,  rateUpper);
             return View("Search", bookTable);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> FindSort(double a1)
+        {
+            
+            a1 = a1 + 1;
+            
+            return View("Search");
+        }
+
+   
     }
 }

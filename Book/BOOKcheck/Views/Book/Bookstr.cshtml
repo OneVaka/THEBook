@@ -1,4 +1,6 @@
-﻿
+﻿@model BOOKcheck.Storage.Entity.Book
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,17 +10,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <title>Login</title>
+    @if (Context.Request.Cookies["bookCookie"] != null)
+    {
+        <style>
+
+            .auth {
+                display: normal;
+            }
+        </style>
+
+    }
+    @if (Context.Request.Cookies["bookCookie"] == null)
+    {
+        <style>
+
+            .auth {
+                display: none;
+            }
+        </style>
+     }
 </head>
 <body class="color1">
     <div class="login">
+        
         <div class="container">
-            <h1 class="mt-5" style="text-align:center">Библиотека: User</h1>
-            <div class="block mt-5">
+            <h1 class="mt-5" style="text-align:center">Страница книги</h1>
+            <div class="block mt-5" style="height:100%">
                 <div class="info">
                     <nav>
                         <ul>
-                            <li style="height: auto">
+                            <li style="height: auto;color:black">
+
+
+
+
+
                                 <p style="color: black">Книга: тут будет выводится книга на которую пользователь нажмет в поиске</p>
+
+                                <img src="~/images/Alice.jpg" height="240" width="145" /> <label id="bookName">@Model.Name</label> <label>@Model.Author.Name</label>
+
+                                <div class="auth">
+                                    @using (Html.BeginForm("SetUserLibBook", "Book", FormMethod.Post))
+                                    {
+                                        <input name="bookId" id="bookId" style="display:none" type="text" size="4" value="@Model.Id">
+                                        <label for="customRange3" class="form-label">Сортировка по:</label>
+
+                                        <select name="libOption" id="libOption" class="form-select" aria-label="Default select example">
+                                            <option selected hidden value="0"> Выбор списка </option>
+                                            <option value="1">Читаю</option>
+                                            <option value="2">Закончил читать</option>
+                                            <option value="3">Хочу читать</option>
+                                            <option value="3">Бросил читать</option>
+                                        </select>
+                                        <input name="page" id="page" style="width: 15%;" type="text" size="4" placeholder="Номер страницы">
+
+                                        <button style="width: 100%; margin-top:5px" type="submit" class="btn btn-primary">Искать</button>
+                                    }
+                                </div>
+
+
+
                                 <p style="color: black"> Ометить как читаю <button style="width: 100px;" type="button" class="btn btn-primary">Читаю</button></p>
                                 если пользователь нажал читаю должно появится окно в котором он может отметить на какой странице он читает и типо это пойдет к нему в профиль
                                 <p style="color: black">Для читаю: Введите номер страницы на которой вы остановилиь <input style="width: 15%;" type="text" size="4" placeholder="Номер страница"><button style="width: 100px;" type="button" class="btn btn-primary">Добавить</button></p>
@@ -28,15 +79,11 @@
 
                                 <p style="color: black"> Ометить как перестал(а) <button style="width: 200px; margin-top: 10px" type="button" class="btn btn-primary">Перестал читать</button></p>
                                 <p style="color: black"> Ометить как хочу прочитать <button style="width: 200px; margin-top: 10px" type="button" class="btn btn-primary">Хочу прочитать</button></p>
+
                             </li>
 
                         </ul>
                     </nav>
-                    <form method="post" action="LogOut">
-
-                        <button type="submit" value="Выйти"> </button>
-
-                    </form>
                 </div>
             </div>
         </div>

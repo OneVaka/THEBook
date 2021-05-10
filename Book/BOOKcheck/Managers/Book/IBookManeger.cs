@@ -20,5 +20,6 @@ namespace BOOKcheck.Managers.Book
         Task<ICollection<Storage.Entity.Book>> UpRating();
 
         Task<ICollection<Storage.Entity.Book>> PridelRating(double reit1, double reit2);
+        Task<Storage.Entity.Book> GetBookById(int Id);
     }
 }

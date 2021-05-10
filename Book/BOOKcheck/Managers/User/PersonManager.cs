@@ -34,16 +34,16 @@ namespace BOOKcheck.Managers.User
         }
 
         //получить Id билиотеки с которой связан пользователь 
-        public int GetIdLiber(int IdUser)
+        public int GetIdLiber(string Login)
         {
-            return context.Person.FirstOrDefault(u => u.Id == IdUser).IdUserLiber;
+            return context.Person.FirstOrDefault(u => u.Login == Login).IdUserLiber;
         }
 
         //создание библиотеки 
         public int AddLiber()
         {
             UserLiber liber = new UserLiber();
-
+           
             context.UserLiber.Add(liber);
             context.SaveChanges();
 
@@ -105,9 +105,9 @@ namespace BOOKcheck.Managers.User
         public bool AddUser(string Mail, string Pass, string Login, ControllerContext controllerContext)
         {
             Person user;
-            user = context.Person.FirstOrDefault(st => st.Mail == Mail);
+            user = context.Person.FirstOrDefault(st => st.Mail == Mail || st.Login == Login);
 
-
+            //данная почта или логин уже заняты
             if (user != null)
                 return false;
             
@@ -123,16 +123,15 @@ namespace BOOKcheck.Managers.User
             context.Person.Add(user);
             context.SaveChanges();
 
-            return true;
-        }
 
-        //выход пользователя
-        public bool UserLogOut(ControllerContext controllerContext)
-        {
-            controllerContext.HttpContext.Response.Cookies.Delete("bookCookie");
+            controllerContext.HttpContext.Response.Cookies.Append("bookCookie", user.Cookies);
+
+            controllerContext.HttpContext.Response.Cookies.Append("Login", user.Login);
+
 
             return true;
         }
+
 
     }
 }

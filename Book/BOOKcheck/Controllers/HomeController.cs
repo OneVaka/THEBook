@@ -23,26 +23,17 @@ namespace BOOKcheck.Controllers
             this.manager = manager;
            
         }
+        
 
         public IActionResult Index()
         {
             return View();
         }
 
-        
 
-        public IActionResult Login()
-        {
-            return View();
-        }
-        public IActionResult Registr()
-        {
-            return View();
-        }
-        public IActionResult books()
-        {
-            return View();
-        }
+       
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

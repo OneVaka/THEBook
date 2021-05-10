@@ -1,92 +1,109 @@
-﻿using BOOKcheck.Managers.User;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using BOOKcheck.Managers.Liber;
+using BOOKcheck.Managers.User;
+using BOOKcheck.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BOOKcheck.Controllers
 {
     public class UserPageController : Controller
     {
+        private ILiberManager manager;
+        private IPersonManager managerUser;
 
-        private IPersonManager manager;
-
-
-        public UserPageController(IPersonManager manager)
+        public UserPageController(ILiberManager manager, IPersonManager managerUser)
         {
-
             this.manager = manager;
-
+            this.managerUser = managerUser;
         }
 
 
-        public IActionResult Registration()
-        {
-
-            
-            string userCook = Request.Cookies["bookCookie"];
-            if(userCook != "")
-            {
-                if (manager.CheckCookie(userCook))
-                    return RedirectToAction("Bookstr");
-            }
-
-            return View();
-        }
-
-        public async Task<IActionResult> Bookstr()
+        public async Task<IActionResult> Index()
         {
             string userCook = Request.Cookies["bookCookie"];
-            if (userCook != "")
+            if(userCook == "")
             {
-                if (manager.CheckCookie(userCook))
-                    return View();
+                return RedirectToAction("Index", "Authorization");
             }
-            return RedirectToAction("Registration");
+            else
+            {
+                if (!managerUser.CheckCookie(userCook))
+                    return RedirectToAction("Index", "Authorization");
+            }
+
+            ICollection<UserLibModel> lib = new List<UserLibModel>();
+
+            return View(lib);
         }
+
+
 
 
         [HttpPost]
-        public async Task<IActionResult> Registration(string Mail, string Pass, string Login)
+        public async Task<IActionResult> getLib(int libOption)
         {
+            var userLib = await manager.GetUserLib(libOption, Request.Cookies["Login"]);
 
-           if( manager.AddUser(Mail, Pass, Login, ControllerContext))
-           {
-                manager.LogInUser(Login, Pass, ControllerContext);
-                return RedirectToAction("Bookstr");
-           }
+            
+
+            ICollection<UserLibModel> libModel = new List<UserLibModel>();
+
+            UserLibModel temp = new UserLibModel();
+            switch (libOption)
+            {
+                case 1:
+                    foreach (var item in userLib)
+                        foreach (var item_2 in item.NowRead)
+                        {
+                            temp.Book = item_2.Book;
+                            temp.Page = item_2.Page;
+                            libModel.Add(temp);
+                        }
+                    break;
+                case 2:
+                    foreach (var item in userLib)
+                        foreach (var item_2 in item.FinishRead)
+                        {
+                            temp.Book = item_2.Book;
+                            temp.Page = item_2.Page;
+                            libModel.Add(temp);
+                        }
+                    break;
+                case 3:
+                    foreach (var item in userLib)
+                        foreach (var item_2 in item.WantRead)
+                        {
+                            temp.Book = item_2.Book;
+                            temp.Page = item_2.Page;
+                            libModel.Add(temp);
+                        }
+                    break;
+                case 4:
+                    foreach (var item in userLib)
+                        foreach (var item_2 in item.EndRead)
+                        {
+                            temp.Book = item_2.Book;
+                            temp.Page = item_2.Page;
+                            libModel.Add(temp);
+                        }
+                    break;
+                default:
+                    break;
+            }
            
-            else
-            {
-                return RedirectToAction("Registration");
-            }
-
-
+            return View("Index",libModel);
         }
 
 
-       [HttpPost]
-       public async Task<IActionResult> Loggining(string Login, string Pass)
-       {
-            if (manager.LogInUser(Login, Pass,ControllerContext))
-                return RedirectToAction("Bookstr");
-
-            else
-            {
-                return RedirectToAction("Registration");
-            }
-
-        }
 
         [HttpPost]
         public IActionResult LogOut()
         {
-
-            
             HttpContext.Response.Cookies.Delete("bookCookie");
-           // manager.UserLogOut(ControllerContext);
-            return RedirectToAction("Registration");
+            // manager.UserLogOut(ControllerContext);
+            return RedirectToAction("Index", "Authorization");
         }
 
 
