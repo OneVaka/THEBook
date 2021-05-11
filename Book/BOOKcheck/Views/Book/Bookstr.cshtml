@@ -42,12 +42,12 @@
                             <li style="height: auto;color:black">
 
 
-
-
-
-                                <p style="color: black">Книга: тут будет выводится книга на которую пользователь нажмет в поиске</p>
-
-                                <img src="~/images/Alice.jpg" height="240" width="145" /> <label id="bookName">@Model.Name</label> <label>@Model.Author.Name</label>
+                                <img src="~/images/Alice.jpg" height="240" width="145" />
+                                <label id="bookName">@Model.Name</label> <label>@Model.Author.Name</label>
+                                <p>Рейтинг:</p> <p>Год:</p> <p>Жанр:</p>
+                                <form style="border: 1px solid #000000;margin:auto;margin-bottom: 4px;border-radius: 3px;" action="https://localhost:44384/Authorization">
+                                    <a>Чтобы воспользоваться дополнительными фунциями сайта вы можете войти в свою библеотеку <button style="width: 15%; margin-top: 5px; margin-bottom: 3px;margin-left: 10px; border: 3px solid #000000;" type="submit" class="btn btn-primary">Войти</button></a>
+                                    </form>
 
                                 <div class="auth">
                                     @using (Html.BeginForm("SetUserLibBook", "Book", FormMethod.Post))
@@ -62,24 +62,12 @@
                                             <option value="3">Хочу читать</option>
                                             <option value="3">Бросил читать</option>
                                         </select>
-                                        <input name="page" id="page" style="width: 15%;" type="text" size="4" placeholder="Номер страницы">
+                                        <input name="page" id="page" style="width: 15%; margin-top: 3px" type="text" size="4" placeholder="Номер страницы">
+                                        <input name="page" id="page" style="width: 15%; margin-top: 3px" type="text" size="4" placeholder="Рейтинг">
 
                                         <button style="width: 100%; margin-top:5px" type="submit" class="btn btn-primary">Искать</button>
                                     }
                                 </div>
-
-
-
-                                <p style="color: black"> Ометить как читаю <button style="width: 100px;" type="button" class="btn btn-primary">Читаю</button></p>
-                                если пользователь нажал читаю должно появится окно в котором он может отметить на какой странице он читает и типо это пойдет к нему в профиль
-                                <p style="color: black">Для читаю: Введите номер страницы на которой вы остановилиь <input style="width: 15%;" type="text" size="4" placeholder="Номер страница"><button style="width: 100px;" type="button" class="btn btn-primary">Добавить</button></p>
-                                <p style="color: black"> Ометить как прочитаное <button style="width: 100px;" type="button" class="btn btn-primary">Прочитал</button></p>
-                                если пользователь отметил как прочитал то должно высветится поле для ввода рейтинга
-                                <p style="color: black; height: auto">Для прочитал: Введите рейтинг для прочитанной книги <input class="reiting" style="width: 15%;" type="text" size="2" placeholder="Рейтинг"><button style="width: 100px;" type="button" class="btn btn-primary">Добавить</button></p>
-
-                                <p style="color: black"> Ометить как перестал(а) <button style="width: 200px; margin-top: 10px" type="button" class="btn btn-primary">Перестал читать</button></p>
-                                <p style="color: black"> Ометить как хочу прочитать <button style="width: 200px; margin-top: 10px" type="button" class="btn btn-primary">Хочу прочитать</button></p>
-
                             </li>
 
                         </ul>
