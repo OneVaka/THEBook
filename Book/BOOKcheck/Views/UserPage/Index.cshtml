@@ -31,10 +31,10 @@
 </head>
 
 <body class="color1">
-    <div class="login" >
+    <div class="login">
         <div class="container">
             <h1 class="mt-5" style="text-align:center">Библиотека: User</h1>
-            <div class="block mt-5" >
+            <div class="block mt-5">
                 <div class="select">
                     <form method="post" action="/UserPage/getLib">
                         <select class="form-select form-select-lg mb-1" aria-label=".form-select-lg example" onchange="this.form.submit()" name="libOption">
@@ -46,15 +46,15 @@
                         </select>
                     </form>
 
-                    <button style="width: 100%;" type="button" class="btn btn-warning mt-3">Случайная книга</button>
 
-                    <form  method="post" action="/UserPage/LogOut">
 
-                        <button style="width: 100%" class="btn btn-warning mt-3" type="submit">Выйти </button>
+                    <form method="post" action="/UserPage/LogOut">
+                        <button style="width: 100%;" class="btn btn-warning mt-3" type="submit">Выйти </button>
 
                     </form>
                 </div>
-                <div class="info"> 
+
+                <div class="info">
 
                     <table style="width: 100%; ">
 
@@ -67,12 +67,12 @@
                             </tr>
                         }
                         @if (Model.Count != 0)
-                        @foreach (var userLiber in Model)
-                         {
-                            
-                            
+                            @foreach (var userLiber in Model)
+                            {
+
+
                                 <tr style="height:max-content">
-                                 
+
 
                                     <td><a style="text-decoration:none; color:black;" href="/Book/@userLiber.Book.Id">@userLiber.Book.Name</a></td>
                                     <td>@userLiber.Book.Genre.Name</td>
@@ -80,15 +80,15 @@
                                     <td>@userLiber.Book.Author.Name</td>
                                     <td style="text-align:center">@userLiber.Book.Rating.OurRating</td>
                                     <td style="text-align:center">@userLiber.Book.Rating.WorldRating</td>
-                                    
+
                                     <td style="text-align:center">@userLiber.Page.Number</td>
-                                    
+
                                 </tr>
-                            
-                         }
+
+                            }
 
                     </table>
-                  
+
                     <nav>
                         <ul>
                             <li style="height: auto">
