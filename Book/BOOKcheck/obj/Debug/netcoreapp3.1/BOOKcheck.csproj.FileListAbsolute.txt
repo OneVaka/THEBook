@@ -935,3 +935,4 @@ C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcor
 C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.pdb
 C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.genruntimeconfig.cache
 C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\BOOKcheck.csprojAssemblyReference.cache
+C:\Users\fraaaaaaaaaanc\Documents\GitHub\THEBook\Book\BOOKcheck\obj\Debug\netcoreapp3.1\Razor\Views\Book\avtorstr.cshtml.g.cs
