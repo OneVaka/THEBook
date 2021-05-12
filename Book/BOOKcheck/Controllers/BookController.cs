@@ -31,10 +31,16 @@ namespace BOOKcheck.Controllers
         }
 
         [HttpGet("Book/{bookId}")]
-        public IActionResult Bookstr(int bookId)
+        public async Task<IActionResult> Bookstr(int bookId)
         {
-            var model = bookManager.GetBookById(bookId).Result;
 
+            var model = await bookManager.GetBookById(bookId);
+
+            //если нет книги с заданным АйДи
+            if(model == null)
+            {
+                return NotFound();             //("Похоже данной книги нет в нашей библиотеке :c");
+            }
             return View(model);
         }
 

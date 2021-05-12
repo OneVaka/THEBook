@@ -38,12 +38,17 @@ namespace BOOKcheck.Controllers
         [HttpPost]
         public async Task<IActionResult> Registration(string Mail, string Pass, string Login)
         {
-            
+
             if (manager.AddUser(Mail, Pass, Login, ControllerContext))
                 return RedirectToAction("Index", "UserPage");
 
             else
+            {
+                //НУЖНА МОДЕЛЬ ДЛЯ HTML
+               // ModelState.AddModelError("Mail", "Данная почта уже используется");
+
                 return RedirectToAction("Index");
+            }
         }
 
 

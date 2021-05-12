@@ -62,7 +62,17 @@ namespace BOOKcheck.Managers.Book
         public async Task<Storage.Entity.Book> GetBookById(int Id)
         {
             //return await context.Book.Where(bk => bk.Id == Id).Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
-            return await context.Book.Where(book => book.Id == Id).Include(book => book.Author).Include(book => book.Genre).Include(book => book.Rating).SingleAsync();
+            Storage.Entity.Book book = null;
+            try
+            {
+                book = await context.Book.Where(book => book.Id == Id).Include(book => book.Author).Include(book => book.Genre).Include(book => book.Rating).SingleAsync(); 
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return book;
         }
 
     }

@@ -44,7 +44,7 @@
 
                         <div class="select" style="margin-top: 5px;">
                             <hr />
-                            @using (Html.BeginForm("FindAutor", "Search", FormMethod.Get))
+                            @using (Html.BeginForm("FindAutor", "Search", FormMethod.Get)) 
                             {
 
                                 <input id="name" name="name" type="text" class="form-control" placeholder="Автор" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -62,8 +62,8 @@
 
                                 <label style="margin-top: 0px;" for="customRange3" class="form-label">Рейтинг:</label>
                                 <p>
-                                    От <input name="rateDown" id="rateDown" style="width: 50%" type="text" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    До <input name="rateUpper" id="rateUpper" style="width: 50%" type="text" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    От <input name="rateDown" id="rateDown" min="0" max="10" style="width: 50%" type="number" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    До <input name="rateUpper" id="rateUpper" min="0" max="10" style="width: 50%" type="number" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2">
                                 </p>
                                 <button style="width: 100%;" type="submit" class="btn btn-primary">Искать</button>
                             }
