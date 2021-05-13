@@ -19,23 +19,23 @@ namespace BOOKcheck.Managers.Book
 
 
 
-        public async Task<ICollection<Storage.Entity.Book>> GetS(string nameAutor, int id, double rait1, double rait2, bool fUp, bool fDown)
+        public async Task<ICollection<Storage.Entity.Book>> GetS(string nameAutor, int genreId, double rait1, double rait2, int sortVal)
         {
             var f = context.Book.Where(b => b.Id > 0);
-
+            
             if (nameAutor != null)
                 f = GetAutorT(nameAutor, f);
 
-            if (id != 0)
-                f = GetGenreT(id, f);
+            if (genreId != 0)
+                f = GetGenreT(genreId, f);
 
             if ((rait1 != -1) && (rait2 != -1))
                 f = PridelRatingT(rait1, rait2, f);
 
-            if (fUp != false)
+            if (sortVal == 2)
                 f = UpRatingT(f);
 
-            if (fDown != false)
+            if (sortVal == 1)
                 f = DownRatingT(f);
 
 
@@ -70,6 +70,11 @@ namespace BOOKcheck.Managers.Book
         //взятие промежутка
         public IQueryable<Storage.Entity.Book> PridelRatingT(double rait1, double rait2, IQueryable<Storage.Entity.Book> con)
         {
+            if (rait1 == 0 && rait2 == 0)
+                return con.Where(r => r.Rating.WorldRating >= 0).Where(r => r.Rating.WorldRating <= 10);
+
+
+
             return con.Where(r => r.Rating.WorldRating >= rait1).Where(r => r.Rating.WorldRating <= rait2);
         }
 

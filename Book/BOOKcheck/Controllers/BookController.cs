@@ -57,7 +57,7 @@ namespace BOOKcheck.Controllers
                switch (libOption)
                {
                    case 1:
-                     await  manager.AddBookNow(idLiberUser,bookId,page);
+                     await  manager.AddBookNow(idLiberUser,bookId, page);
                        break;
                    case 2:
                      await  manager.AddBookFinish(idLiberUser, bookId, page);

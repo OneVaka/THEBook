@@ -50,17 +50,20 @@ namespace BOOKcheck.Controllers
 
             
 
-            ICollection<UserLibModel> libModel = new List<UserLibModel>();
+            List<UserLibModel> libModel = new List<UserLibModel>();
+            UserLibModel temp = null;
 
-            UserLibModel temp = new UserLibModel();
+
             switch (libOption)
             {
                 case 1:
                     foreach (var item in userLib)
                         foreach (var item_2 in item.NowRead)
                         {
+                            temp = new UserLibModel();
                             temp.Book = item_2.Book;
                             temp.Page = item_2.Page;
+
                             libModel.Add(temp);
                         }
                     break;
@@ -68,8 +71,10 @@ namespace BOOKcheck.Controllers
                     foreach (var item in userLib)
                         foreach (var item_2 in item.FinishRead)
                         {
+                            temp = new UserLibModel();
                             temp.Book = item_2.Book;
                             temp.Page = item_2.Page;
+
                             libModel.Add(temp);
                         }
                     break;
@@ -77,8 +82,10 @@ namespace BOOKcheck.Controllers
                     foreach (var item in userLib)
                         foreach (var item_2 in item.WantRead)
                         {
+                            temp = new UserLibModel();
                             temp.Book = item_2.Book;
                             temp.Page = item_2.Page;
+
                             libModel.Add(temp);
                         }
                     break;
@@ -86,8 +93,10 @@ namespace BOOKcheck.Controllers
                     foreach (var item in userLib)
                         foreach (var item_2 in item.EndRead)
                         {
+                            temp = new UserLibModel();
                             temp.Book = item_2.Book;
                             temp.Page = item_2.Page;
+
                             libModel.Add(temp);
                         }
                     break;
@@ -98,15 +107,7 @@ namespace BOOKcheck.Controllers
             return View("Index",libModel);
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> ChangePage(int newPage)
-        {
-
-
-
-            return RedirectToAction("Index");
-        }
+         
 
         [HttpPost]
         public IActionResult LogOut()

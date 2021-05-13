@@ -65,12 +65,12 @@ namespace BOOKcheck.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> FindSort(double a1)
+        public async Task<IActionResult> FindBookBySort(string autorName, int genreID,double rateDown,double rateUpper,int sortVal)
         {
+
+            var bookTable = await manager.GetS(autorName, genreID, rateDown, rateUpper, sortVal);
             
-            a1 = a1 + 1;
-            
-            return View("Search");
+            return View("Search",bookTable);
         }
 
    

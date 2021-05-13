@@ -23,6 +23,6 @@ namespace BOOKcheck.Managers.Book
 
         Task<Storage.Entity.Book> GetBookById(int Id);
 
-        Task<ICollection<Storage.Entity.Book>> GetS(string nameAutor, int id, double rait1, double rait2, bool fUp, bool fDown);
+        Task<ICollection<Storage.Entity.Book>> GetS(string nameAutor, int id, double rait1, double rait2, int sortVal);
     }
 }
