@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using BOOKcheck.Storage;
 using BOOKcheck.Storage.Lib;
 using BOOKcheck.Storage.User;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BOOKcheck.Managers.User
 {
@@ -18,49 +20,59 @@ namespace BOOKcheck.Managers.User
             this.context = context;
         }
 
-        public string GetPass(int IdUser)
+        public async Task<string> GetPass(int IdUser)
         {
-            return context.Person.FirstOrDefault(u => u.Id == IdUser).Pass;
+            var user = await context.Person.FirstOrDefaultAsync(u => u.Id == IdUser);
+
+            
+            return user.Pass;
         }
 
-        public string GetLogin(int IdUser)
+        public async Task<string> GetLogin(int IdUser)
         {
-            return context.Person.FirstOrDefault(u => u.Id == IdUser).Login;
+            var user = await context.Person.FirstOrDefaultAsync(u => u.Id == IdUser);
+            
+            return user.Login;
         }
 
-        public string GetMail(int IdUser)
+        public async Task<string> GetMail(int IdUser)
         {
-            return context.Person.FirstOrDefault(u => u.Id == IdUser).Mail;
+            var user = await context.Person.FirstOrDefaultAsync(u => u.Id == IdUser);
+            return user.Mail;
         }
 
         //получить Id билиотеки с которой связан пользователь 
-        public int GetIdLiber(string Login)
+        public async Task<int> GetIdLiber(string Login)
         {
-            return context.Person.FirstOrDefault(u => u.Login == Login).IdUserLiber;
+            var user = await context.Person.FirstOrDefaultAsync(u => u.Login == Login);
+
+            return user.IdUserLiber;
         }
 
+
+
+
+
         //создание библиотеки 
-        public int AddLiber()
+        public async Task<int> AddLiber()
         {
             UserLiber liber = new UserLiber();
            
-            context.UserLiber.Add(liber);
-            context.SaveChanges();
+           await context.UserLiber.AddAsync(liber);
+           await context.SaveChangesAsync();
 
             return liber.Id;
         }
 
 
 
-
-
-
         //проверка на совпадение печеньки
-        public bool CheckCookie(string userCookie)
+        public async Task<bool> CheckCookie(string userCookie, string Login)
         {
-            Person user = context.Person.FirstOrDefault(st => st.Cookies == userCookie);
+            Person user = await context.Person.FirstOrDefaultAsync(st => st.Cookies == userCookie && st.Login == Login);
 
             if (user != null)
+
                 return true;
 
             else
@@ -82,11 +94,11 @@ namespace BOOKcheck.Managers.User
         }
 
         //вход зарегистрированного пользователя
-        public bool LogInUser(string Login, string Pass, ControllerContext controllerContext)
+        public async Task<bool> LogInUser(string Login, string Pass, ControllerContext controllerContext)
         {
             Person user;
 
-            user = context.Person.FirstOrDefault(st => (st.Login == Login && st.Pass == Pass));
+            user = await context.Person.FirstOrDefaultAsync(st => (st.Login == Login && st.Pass == Pass));
 
             if (user != null)
             {
@@ -102,10 +114,10 @@ namespace BOOKcheck.Managers.User
         }
 
         //создать/зарегистрировать пользователя
-        public bool AddUser(string Mail, string Pass, string Login, ControllerContext controllerContext)
+        public async Task<bool> AddUser(string Mail, string Pass, string Login, ControllerContext controllerContext)
         {
             Person user;
-            user = context.Person.FirstOrDefault(st => st.Mail == Mail || st.Login == Login);
+            user = await context.Person.FirstOrDefaultAsync(st => st.Mail == Mail || st.Login == Login);
 
             //данная почта или логин уже заняты
             if (user != null)
@@ -117,11 +129,11 @@ namespace BOOKcheck.Managers.User
             user.Mail  = Mail;
             user.Login = Login;
             user.Pass  = Pass;
-            user.IdUserLiber = AddLiber();
+            user.IdUserLiber = await AddLiber();
             user.Cookies = GetCookie(Login);
 
-            context.Person.Add(user);
-            context.SaveChanges();
+            await context.Person.AddAsync(user);
+            await context.SaveChangesAsync();
 
 
             controllerContext.HttpContext.Response.Cookies.Append("bookCookie", user.Cookies);

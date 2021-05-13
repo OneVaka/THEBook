@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-
+using System.Threading.Tasks;
 
 namespace BOOKcheck.Managers.User
 {
     public interface IPersonManager
     {
-        public int GetIdLiber(string Login);
+        Task<int> GetIdLiber(string Login);
 
-        public bool CheckCookie(string userCookie);
+        Task<bool> CheckCookie(string userCookie, string Login);
 
-        public bool LogInUser(string Login, string Pass, ControllerContext controllerContext);
+        Task<bool> LogInUser(string Login, string Pass, ControllerContext controllerContext);
 
-        public bool AddUser(string Mail,string Pass, string Login, ControllerContext controllerContext);
+        Task<bool> AddUser(string Mail,string Pass, string Login, ControllerContext controllerContext);
 
     }
 }

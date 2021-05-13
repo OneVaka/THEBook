@@ -24,11 +24,12 @@ namespace BOOKcheck.Controllers
         public async Task<IActionResult> Index()
         {
 
-            
+            string userLogin = Request.Cookies["Login"];
             string userCook = Request.Cookies["bookCookie"];
+
             if(userCook != "")
             {
-                if (manager.CheckCookie(userCook))
+                if (await manager.CheckCookie(userCook,userLogin))
                     return RedirectToAction("Index","UserPage");
             }
 
@@ -39,7 +40,7 @@ namespace BOOKcheck.Controllers
         public async Task<IActionResult> Registration(string Mail, string Pass, string Login)
         {
 
-            if (manager.AddUser(Mail, Pass, Login, ControllerContext))
+            if (await manager.AddUser(Mail, Pass, Login, ControllerContext))
                 return RedirectToAction("Index", "UserPage");
 
             else
@@ -57,7 +58,7 @@ namespace BOOKcheck.Controllers
        {
             string x = Request.Form.FirstOrDefault(k => k.Key == "Login").Value;        
 
-            if (manager.LogInUser(Login, Pass,ControllerContext))
+            if (await manager.LogInUser(Login, Pass,ControllerContext))
                 return RedirectToAction("Index", "UserPage");
 
             else

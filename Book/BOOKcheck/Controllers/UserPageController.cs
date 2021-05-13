@@ -23,13 +23,15 @@ namespace BOOKcheck.Controllers
         public async Task<IActionResult> Index()
         {
             string userCook = Request.Cookies["bookCookie"];
+            string userLogin = Request.Cookies["Login"];
+
             if(userCook == "")
             {
                 return RedirectToAction("Index", "Authorization");
             }
             else
             {
-                if (!managerUser.CheckCookie(userCook))
+                if ( !(await managerUser.CheckCookie(userCook,userLogin)) )
                     return RedirectToAction("Index", "Authorization");
             }
 
@@ -97,6 +99,14 @@ namespace BOOKcheck.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> ChangePage(int newPage)
+        {
+
+
+
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         public IActionResult LogOut()

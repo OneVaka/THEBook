@@ -15,10 +15,10 @@ namespace BOOKcheck.Controllers
         private IPersonManager personManager;
         private IBookManeger bookManager;
 
-        public BookController(ILiberManager maneger, IPersonManager personManager, IBookManeger bookManager)
+        public BookController(ILiberManager manager, IPersonManager personManager, IBookManeger bookManager)
         {
             this.personManager = personManager;
-            this.manager = maneger;
+            this.manager = manager;
             this.bookManager = bookManager;
             
         }
@@ -41,6 +41,7 @@ namespace BOOKcheck.Controllers
             {
                 return NotFound();             //("ѕохоже данной книги нет в нашей библиотеке :c");
             }
+
             return View(model);
         }
 
@@ -49,23 +50,23 @@ namespace BOOKcheck.Controllers
         {
             string userLogin = HttpContext.Request.Cookies["Login"];
 
-               int idLiberUser = personManager.GetIdLiber(userLogin);
+               int idLiberUser = await personManager.GetIdLiber(userLogin); 
 
-               manager.RemoveBook(idLiberUser, bookId);
+               await manager.RemoveBook(idLiberUser, bookId);
 
                switch (libOption)
                {
                    case 1:
-                       manager.AddBookNow(idLiberUser,bookId,page);
+                     await  manager.AddBookNow(idLiberUser,bookId,page);
                        break;
                    case 2:
-                       manager.AddBookFinish(idLiberUser, bookId, page);
+                     await  manager.AddBookFinish(idLiberUser, bookId, page);
                        break;
                    case 3:
-                       manager.AddBookWant(idLiberUser, bookId, page);
+                      await manager.AddBookWant(idLiberUser, bookId, page);
                        break;
                    case 4:
-                       manager.AddBookEnd(idLiberUser, bookId, page);
+                      await manager.AddBookEnd(idLiberUser, bookId, page);
                        break;
                    default:
                        break;

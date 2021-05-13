@@ -16,6 +16,69 @@ namespace BOOKcheck.Managers.Book
         {
             this.context = context;
         }
+
+
+
+        public async Task<ICollection<Storage.Entity.Book>> GetS(string nameAutor, int id, double rait1, double rait2, bool fUp, bool fDown)
+        {
+            var f = context.Book.Where(b => b.Id > 0);
+
+            if (nameAutor != null)
+                f = GetAutorT(nameAutor, f);
+
+            if (id != 0)
+                f = GetGenreT(id, f);
+
+            if ((rait1 != -1) && (rait2 != -1))
+                f = PridelRatingT(rait1, rait2, f);
+
+            if (fUp != false)
+                f = UpRatingT(f);
+
+            if (fDown != false)
+                f = DownRatingT(f);
+
+
+            return await f.Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).ToListAsync();
+        }
+
+        //поиск по автору
+        public IQueryable<Storage.Entity.Book> GetAutorT(string nameAutor, IQueryable<Storage.Entity.Book> con)
+        {
+            return con.Where(s => s.Author.Name == nameAutor);
+        }
+        //поиск книги по названию
+        public IQueryable<Storage.Entity.Book> GetBookT(string nameBook, IQueryable<Storage.Entity.Book> con)
+        {
+            return con.Where(bk => bk.Name == nameBook);
+        }
+        //поиск по жанру
+        public IQueryable<Storage.Entity.Book> GetGenreT(int id, IQueryable<Storage.Entity.Book> con)
+        {
+            return con.Where(bk => bk.IdGenre == id);
+        }
+        //сортировка по возрастанию
+        public IQueryable<Storage.Entity.Book> DownRatingT(IQueryable<Storage.Entity.Book> con)
+        {
+            return con.OrderBy(r => r.Rating.WorldRating);
+        }
+        //сортировка по убыванию
+        public IQueryable<Storage.Entity.Book> UpRatingT(IQueryable<Storage.Entity.Book> con)
+        {
+            return con.OrderByDescending(r => r.Rating.WorldRating);
+        }
+        //взятие промежутка
+        public IQueryable<Storage.Entity.Book> PridelRatingT(double rait1, double rait2, IQueryable<Storage.Entity.Book> con)
+        {
+            return con.Where(r => r.Rating.WorldRating >= rait1).Where(r => r.Rating.WorldRating <= rait2);
+        }
+
+        ///////////////////////
+
+
+
+
+
         //вывод всей библиотеки
         public async Task<ICollection<Storage.Entity.Book>> GetAll()
         {
