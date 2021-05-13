@@ -13,19 +13,24 @@
 
     <style>
         table {
-            color:black;
+            color: black;
             font: 14px/1.5 sans-serif;
             counter-reset: count;
         }
 
-        table td:first-child:before {
-                    content: counter(count);
-                    counter-increment: count;
-                   
-                    margin-right: 1em;
+            table td:first-child:before {
+                content: counter(count);
+                counter-increment: count;
+                margin-right: 1em;
+            }
+
+        a {
+            text-decoration: none;
         }
 
-                
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 
 </head>
@@ -70,43 +75,27 @@
                             @foreach (var userLiber in Model)
                             {
 
-
                                 <tr style="height:max-content">
 
+                                    
 
-                                    <td><a style="text-decoration:none; color:black;" href="/Book/@userLiber.Book.Id">@userLiber.Book.Name</a></td>
-                                    <td>@userLiber.Book.Genre.Name</td>
-                                    <td>@userLiber.Book.Year</td>
-                                    <td>@userLiber.Book.Author.Name</td>
-                                    <td style="text-align:center">@userLiber.Book.Rating.OurRating</td>
-                                    <td style="text-align:center">@userLiber.Book.Rating.WorldRating</td>
+                                        <td><a style=" color:black;" href="/Book/@userLiber.Book.Id">@userLiber.Book.Name</a></td>
+                                        <td>@userLiber.Book.Genre.Name</td>
+                                        <td>@userLiber.Book.Year</td>
+                                        <td>@userLiber.Book.Author.Name</td>
+                                        <td style="text-align:center">@userLiber.Book.Rating.OurRating</td>
+                                        <td style="text-align:center">@userLiber.Book.Rating.WorldRating</td>
 
-                                    <td style="text-align:center">@userLiber.Page.Number</td>
-
+                                        <td style="text-align:center">Страница: @userLiber.Page.Number</td>
+                                        
+                                   
                                 </tr>
-
+                                
                             }
 
                     </table>
 
-                    <nav>
-                        <ul>
-                            <li style="height: auto">
-                                <p style="color: black">Для читаю: Введите номер страницы на которой вы остановилиь <input style="width: 15%;" type="text" size="40" placeholder="Номер страница"><button style="width: 100px;" type="button" class="btn btn-primary">Добавить</button></p>
-                                <p style="color: black"><input type="radio" name="a1" value=""> Ометить как прочитанное</p>
-                                <p style="color: black"><input type="radio" name="a1" value=""> Отметить как перестал(а) читать</p>
-                            </li>
-                            <li>
-                                <p style="color: black; height: auto">Для прочитал: Введите рейтинг для прочитанной книги <input style="width: 15%;" type="text" size="40" placeholder="Рейтинг"><button style="width: 100px;" type="button" class="btn btn-primary">Добавить</button></p>
-                            </li>
-                            <li>
-                                <p style="color: black; height: auto">Поле для вывода случайной книги <button style="width: 150px; margin-bottom: 2px" type="button" class="btn btn-primary">Сгенерировать</button></p>
-                                <div>
-
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
+                    
                 </div>
 
             </div>
