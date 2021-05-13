@@ -169,11 +169,11 @@ namespace BOOKcheck.Managers.Liber
                 switch (flagLiber)
                 {
                     case 1:
-                      await  AddBookEnd(IdUser, IdBook, p);
+                      await  AddBookEnd(IdUser, IdBook, p,f);
                         break;
 
                     case 2:
-                      await  AddBookFinish(IdUser, IdBook, p);
+                      await  AddBookFinish(IdUser, IdBook, p,f);
                         break;
 
                     case 3:
@@ -223,9 +223,11 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //добавить книгу в FinishRead
-        public async Task AddBookFinish(int IdUser, int IdBook, int numberPage)
+        public async Task AddBookFinish(int IdUser, int IdBook, int numberPage,int rate)
         {
             int idPage = await AddPage(numberPage);
+
+            await ChangeOurRating(IdBook,rate);
 
             FinishRead finish = new FinishRead();
             finish.IdBook = IdBook;
@@ -259,9 +261,11 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //добавить книгу в EndRead
-        public async Task AddBookEnd(int IdUser, int IdBook, int numberPage)
+        public async Task AddBookEnd(int IdUser, int IdBook, int numberPage,int rate)
         {
             int idPage = await AddPage(numberPage);
+
+            await ChangeOurRating(IdBook, rate);
 
             EndRead end = new EndRead();
             end.IdBook = IdBook;
@@ -310,7 +314,7 @@ namespace BOOKcheck.Managers.Liber
         //изменение номера страницы
         public async Task ChangePageNumber(int IdBook, int IdLiber, int PageNumber)
         {
-            var UserPageNuber = await context.EndRead.FirstOrDefaultAsync(r => r.IdUserLiber == IdLiber && r.IdBook == IdBook);
+            var UserPageNuber = await context.NowRead.Where(r => r.IdUserLiber == IdLiber && r.IdBook == IdBook).Include(pg => pg.Page).SingleOrDefaultAsync();
 
             if (UserPageNuber != null)
             {
@@ -322,10 +326,12 @@ namespace BOOKcheck.Managers.Liber
         //изменение рейтинга
         public async Task ChangeOurRating(int IdBook, double appraisal)
         {
-            var UserRating = await context.Book.FirstOrDefaultAsync(r => r.Id == IdBook);
+            var UserRating = await context.Book.Where(r => r.Id == IdBook).Include(st => st.Rating).SingleOrDefaultAsync();
 
             if (UserRating != null)
             {
+
+
                 if (UserRating.Rating.OurRating == 0)
                     UserRating.Rating.OurRating = appraisal;
                 else
@@ -402,6 +408,8 @@ namespace BOOKcheck.Managers.Liber
                                    .Include(end => end.WantRead).ThenInclude(end => end.Page).ToListAsync();
         }
 
+
+       
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model BOOKcheck.Storage.Entity.Book
+﻿@model BookModel
 
 
 <html lang="en">
@@ -30,16 +30,16 @@
                         <li style="height: auto;color:black">
 
                             <div>
-                                <img src="~/images/Alice.jpg" align="left" height="240" width="145" />
-                                
-                                    <p style="margin-left:100px" id="bookName"> @Model.Name</p> 
-                                    <p> @Model.Author.Name</p>
-                                    <p>Рейтинг: @Model.Rating.WorldRating</p>
-                                    <p>Год: @Model.Year</p> 
-                                    <p>Жанр: @Model.Genre.Name</p>
+                                <img src="~/images/Alice.jpg" align="left" height="240" width="145"  />
+                                    
+                                    <p id="bookName"> @Model.Book.Name</p> 
+                                    <p> @Model.Book.Author.Name</p>
+                                    <p>Рейтинг: @Model.Book.Rating.WorldRating</p>
+                                    <p>Год: @Model.Book.Year</p> 
+                                    <p>Жанр: @Model.Book.Genre.Name</p>
                                
                             </div>
-                            <br />
+                           
                             <div>
                                 <label for="customRange3" class="form-label">Описание книги: <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                                                                                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
@@ -47,6 +47,42 @@
                                                                                                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
                                                                                                     officia deserunt mollit anim id est laborum. </label>
                             </div>
+                             @if(Context.Request.Cookies["bookCookie"] != null) { 
+                            <br />
+                            <div>
+
+                                @switch (Model.LibOption)
+                                {
+
+                                    case 3:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы читаете эту книгу </label>
+                                        @using (Html.BeginForm("newPage", "Book", FormMethod.Post))
+                                        {
+                                            <input name="bookID2" id="bookID2" style="display:none" type="text"  value="@Model.Book.Id">
+
+                                            <input id="newPage" name="newPage" type="Text" placeholder="Страница" required />
+                                            <input type="submit" value="Новая страница" />
+                                        }
+                                        break;
+
+                                    case 2:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы уже прочитали эту книгу </label>
+                                        break;
+
+                                    case 4:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы планируете прочитать эту книгу</label>
+                                        break;
+
+                                    case 1:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы бросили читать эту книгу</label>
+                                        break;
+
+                                    default: break;
+                                }
+                            </div>
+                            }
+
+                            <br />
                             <div style="margin-top:50px" >
                                 @if (Context.Request.Cookies["bookCookie"] == null)
                                 {
@@ -58,7 +94,7 @@
                                 <div class="auth">
                                     @using (Html.BeginForm("SetUserLibBook", "Book", FormMethod.Post))
                                     {
-                                        <input name="bookId" id="bookId" style="display:none" type="text" size="4" value="@Model.Id">
+                                        <input name="bookId" id="bookId" style="display:none" type="text" size="4" value="@Model.Book.Id">
                                         <label for="customRange3" class="form-label">Добавить в свою библиотеку:</label>
 
                                         <select name="libOption" id="libOption" class="form-select" aria-label="Default select example" onchange="getSelect(this)">

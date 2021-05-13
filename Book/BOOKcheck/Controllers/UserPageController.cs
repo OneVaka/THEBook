@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BOOKcheck.Managers.Liber;
 using BOOKcheck.Managers.User;
+using BOOKcheck.Managers.Book;
 using BOOKcheck.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,13 @@ namespace BOOKcheck.Controllers
     {
         private ILiberManager manager;
         private IPersonManager managerUser;
+        private IBookManeger managerBook;
 
-        public UserPageController(ILiberManager manager, IPersonManager managerUser)
+        public UserPageController(ILiberManager manager, IPersonManager managerUser, IBookManeger bookManeger)
         {
             this.manager = manager;
             this.managerUser = managerUser;
+            this.managerBook = bookManeger;
         }
 
 
@@ -35,12 +38,24 @@ namespace BOOKcheck.Controllers
                     return RedirectToAction("Index", "Authorization");
             }
 
-            ICollection<UserLibModel> lib = new List<UserLibModel>();
-
-            return View(lib);
+            //ICollection<UserLibModel> lib = new List<UserLibModel>();
+            
+            return View(null);
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> getRandom()
+        {
+            var ranBook = await managerBook.GetRandomBook();
+            UserLibModel temp = new UserLibModel();
+            temp.Book = ranBook;
+            temp.Page = null;
+            List<UserLibModel> libModel = new List<UserLibModel>();
+            libModel.Add(temp);
+
+            return View("Index", libModel);
+        }
 
 
         [HttpPost]
@@ -73,7 +88,7 @@ namespace BOOKcheck.Controllers
                         {
                             temp = new UserLibModel();
                             temp.Book = item_2.Book;
-                            temp.Page = item_2.Page;
+                            temp.Page = null;
 
                             libModel.Add(temp);
                         }
@@ -84,7 +99,7 @@ namespace BOOKcheck.Controllers
                         {
                             temp = new UserLibModel();
                             temp.Book = item_2.Book;
-                            temp.Page = item_2.Page;
+                            temp.Page = null;
 
                             libModel.Add(temp);
                         }

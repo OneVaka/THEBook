@@ -43,11 +43,11 @@ namespace BOOKcheck.Managers.Liber
         public Task AddBookLiber(int IdUser, int IdBook, int flagLiber);
 
         //добавление книг
-        public Task AddBookEnd(int IdUser, int IdBook, int numberPage);
+        public Task AddBookEnd(int IdUser, int IdBook, int numberPage, int rate);
 
         public Task AddBookWant(int IdUser, int IdBook, int numberPage);
 
-        public Task AddBookFinish(int IdUser, int IdBook, int numberPage);
+        public Task AddBookFinish(int IdUser, int IdBook, int numberPage, int rate);
 
         public Task AddBookNow(int IdUser, int IdBook, int numberPage);
 

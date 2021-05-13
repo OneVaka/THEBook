@@ -17,7 +17,18 @@ namespace BOOKcheck.Managers.Book
             this.context = context;
         }
 
+        public async Task<Storage.Entity.Book> GetRandomBook()
+        {
+            Random ran = new Random();
 
+            int max = await context.Book.MaxAsync(book => book.Id);
+            int min = await context.Book.MinAsync(book => book.Id);
+
+            int randomID = ran.Next(min, max);
+
+          
+            return await context.Book.Where(bk => bk.Id == randomID).Include(st1 => st1.Author).Include(st2 => st2.Rating).Include(st3 => st3.Genre).SingleOrDefaultAsync(); 
+        }
 
         public async Task<ICollection<Storage.Entity.Book>> GetS(string nameAutor, int genreId, double rait1, double rait2, int sortVal)
         {

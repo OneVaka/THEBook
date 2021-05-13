@@ -42,6 +42,7 @@
             <div class="block mt-5">
                 <div class="select">
                     <form method="post" action="/UserPage/getLib">
+
                         <select class="form-select form-select-lg mb-1" aria-label=".form-select-lg example" onchange="this.form.submit()" name="libOption">
                             <option selected hidden>Книги</option>
                             <option value="1">Читаю </option>
@@ -51,33 +52,39 @@
                         </select>
                     </form>
 
+                    <form method="post" action="/UserPage/getRandom">
+                        <button style="width: 100%;" class="btn btn-warning mt-3" type="submit">Случайная книга </button>
 
+                    </form>
 
                     <form method="post" action="/UserPage/LogOut">
                         <button style="width: 100%;" class="btn btn-warning mt-3" type="submit">Выйти </button>
 
                     </form>
+
                 </div>
 
                 <div class="info">
+                    @if (Model != null)
+                    {
+                        <table style="width: 100%; font-size:18px; padding:5px,10px,0,10px;">
 
-                    <table style="width: 100%; ">
-
-                        @if (Model.Count == 0)
-                        {
-                            <tr>
-
-                                <td colspan="7" style="font-size:18px; padding-left: 15px">Данный список пуст!</td>
-
-                            </tr>
-                        }
-                        @if (Model.Count != 0)
-                            @foreach (var userLiber in Model)
+                            @if (Model.Count == 0)
                             {
+                                <tr>
 
-                                <tr style="height:max-content">
+                                    <td id="emptyText" colspan="7" style="font-size:18px; padding-left: 15px; ">Данный список пуст!</td>
 
-                                    
+                                </tr>
+                            }
+                            @if (Model.Count != 0)
+                                @foreach (var userLiber in Model)
+                                {
+
+                                    <tr style="height:max-content">
+
+
+
 
                                         <td><a style=" color:black;" href="/Book/@userLiber.Book.Id">@userLiber.Book.Name</a></td>
                                         <td>@userLiber.Book.Genre.Name</td>
@@ -86,16 +93,25 @@
                                         <td style="text-align:center">@userLiber.Book.Rating.OurRating</td>
                                         <td style="text-align:center">@userLiber.Book.Rating.WorldRating</td>
 
-                                        <td style="text-align:center">Страница: @userLiber.Page.Number</td>
-                                        
-                                   
-                                </tr>
-                                
-                            }
+                                        @if (userLiber.Page != null)
+                                        {
+                                            <td style="text-align:center">Страница: @userLiber.Page.Number</td>
+                                        }
 
-                    </table>
+                                    </tr>
 
-                    
+                                }
+
+                        </table>
+                    }
+                    else
+                    {
+
+                        <label id="helloText" colspan="7" style="font-size:24px; font-weight:bold; ">
+                            Добро пожаловать в вашу библиотеку!
+                        </label>
+                    }
+
                 </div>
 
             </div>
