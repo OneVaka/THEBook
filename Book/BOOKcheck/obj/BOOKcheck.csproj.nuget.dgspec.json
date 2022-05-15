@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fraaaaaaaaaanc\\Documents\\GitHub\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj": {}
+    "E:\\projects\\THEbook\\Book\\BOOKcheck\\BOOKcheck.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fraaaaaaaaaanc\\Documents\\GitHub\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj": {
+    "E:\\projects\\THEbook\\Book\\BOOKcheck\\BOOKcheck.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fraaaaaaaaaanc\\Documents\\GitHub\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj",
+        "projectUniqueName": "E:\\projects\\THEbook\\Book\\BOOKcheck\\BOOKcheck.csproj",
         "projectName": "BOOKcheck",
-        "projectPath": "C:\\Users\\fraaaaaaaaaanc\\Documents\\GitHub\\THEBook\\Book\\BOOKcheck\\BOOKcheck.csproj",
-        "packagesPath": "C:\\Users\\fraaaaaaaaaanc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fraaaaaaaaaanc\\Documents\\GitHub\\THEBook\\Book\\BOOKcheck\\obj\\",
+        "projectPath": "E:\\projects\\THEbook\\Book\\BOOKcheck\\BOOKcheck.csproj",
+        "packagesPath": "C:\\Users\\gorel\\.nuget\\packages\\",
+        "outputPath": "E:\\projects\\THEbook\\Book\\BOOKcheck\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\fraaaaaaaaaanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\gorel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -30,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -95,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.213\\RuntimeIdentifierGraph.json"
         }
       }
     }
