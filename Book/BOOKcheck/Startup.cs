@@ -34,9 +34,9 @@ namespace BOOKcheck
             //!!!надо записать в другое место  
             services.AddDbContext<UniversalContext>(options => options.UseSqlite("Data Source = lib2.db"));
 
-            services.AddTransient<IBookManeger,BookManeger>();
+            services.AddTransient<IBookManeger, BookManeger>();
             services.AddTransient<ILiberManager, LiberManager>();
-            services.AddTransient<IPersonManager, IPersonManager>();
+            services.AddTransient<IPersonManager, PersonManager>();
 
         }
 

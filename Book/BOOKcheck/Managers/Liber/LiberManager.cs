@@ -18,87 +18,111 @@ namespace BOOKcheck.Managers.Liber
             this.context = context;
         }
 
+        //pageFinish не должен быть null!!
+
         //удаляет книгу из End
-        public int RemoveBookEnd(int IdBook)
+        public async Task<int> RemoveBookEnd(int IdBook,int IdUser)
         {
             int p=0;
-            var end = context.EndRead.FirstOrDefault(e => e.IdBook == IdBook);
+            var end = await context.EndRead.FirstOrDefaultAsync(b => b.IdBook == IdBook && b.IdUserLiber == IdUser); //должна быть книга из библиотеки определенного пользователя
             if (end != null)
             {
-                var pageEnd = end.Page;
-                p = pageEnd.Number;
-                context.Page.Remove(pageEnd);
+                var pageEnd = await context.Page.FirstOrDefaultAsync(pg => pg.Id == end.IdPage);
+
+                if (pageEnd != null) {
+                    p = pageEnd.Number;
+                    context.Page.Remove(pageEnd);
+                }
                 context.EndRead.Remove(end);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             return p;
         }
+
         //удаляет книгу из Finish
-        public int RemoveBookFinish(int IdBook)
+        public async Task<int> RemoveBookFinish(int IdBook, int IdUser)
         {
             int p = 0;
-            var finish = context.FinishRead.FirstOrDefault(b => b.IdBook == IdBook);
+            var finish = await context.FinishRead.FirstOrDefaultAsync(b => b.IdBook == IdBook && b.IdUserLiber == IdUser);
             if (finish != null)
             {
-                var pageFinish = finish.Page;
-                context.Page.Remove(pageFinish);
+                var pageFinish = await context.Page.FirstOrDefaultAsync(pg => pg.Id == finish.IdPage);
+
+                if (pageFinish != null) { 
+                     p = pageFinish.Number;
+                    context.Page.Remove(pageFinish);
+                }
                 context.FinishRead.Remove(finish);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             return p;
         }
 
         //удаляет книгу из Now
-        public int RemoveBookNow(int IdBook)
+        public async Task<int> RemoveBookNow(int IdBook, int IdUser)
         {
             int p = 0;
-            var now = context.NowRead.FirstOrDefault(b => b.IdBook == IdBook);
+            var now = await context .NowRead.FirstOrDefaultAsync(b => b.IdBook == IdBook && b.IdUserLiber == IdUser);
             if (now != null)
             {
-                var pageNow = now.Page;
-                context.Page.Remove(pageNow);
+                var pageNow = await context.Page.FirstOrDefaultAsync(pg => pg.Id == now.IdPage);
+
+                if (pageNow != null)
+                {
+                    p = pageNow.Number;
+                    context.Page.Remove(pageNow);
+                }
+
                 context.NowRead.Remove(now);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             return p;
         }
 
         //удаляет книгу из Want
-        public int RemoveBookWant(int IdBook)
+        public async Task<int> RemoveBookWant(int IdBook, int IdUser)
         {
             int p = 0;
-            var want = context.WantRead.FirstOrDefault(b => b.IdBook == IdBook);
+            var want = await context.WantRead.FirstOrDefaultAsync(b => b.IdBook == IdBook && b.IdUserLiber == IdUser);
+
             if (want != null)
             {
-                var pageWant = want.Page;
-                context.Page.Remove(pageWant);
-                context.SaveChanges();
+                var pageWant =await context.Page.FirstOrDefaultAsync(pg => pg.Id == want.IdPage);
+
+                if (pageWant != null)
+                {
+                    p = pageWant.Number;
+                    context.Page.Remove(pageWant);
+                }
+
+                context.WantRead.Remove(want);
+                await context.SaveChangesAsync();
             }
             return p;
         }
 
         //просто удаляет кингу по Id книге
-        public void RemoveBook(int IdUser, int IdBook)
+        public  async Task RemoveBook(int IdUser, int IdBook)
         {
             var liber = Proverka(IdUser);
            
             if (liber != null)
             {
-                var f = BookCategory(IdUser, IdBook);
+                var f = await BookCategory(IdUser, IdBook);
 
                 switch (f)
                 {
                     case 1:
-                        RemoveBookEnd(IdBook);
+                     await RemoveBookEnd(IdBook, IdUser);
                         break;
                     case 2:
-                        RemoveBookFinish(IdBook);
+                        await RemoveBookFinish(IdBook, IdUser);
                         break;
                     case 3:
-                        RemoveBookNow(IdBook);
+                        await RemoveBookNow(IdBook, IdUser);
                         break;
                     case 4:
-                        RemoveBookWant(IdBook);
+                        await RemoveBookWant(IdBook, IdUser);
                         break;
 
                     default:
@@ -108,33 +132,33 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //добавление книги в любую категорию 
-        public void AddBookLiber(int IdUser, int IdBook,int flagLiber)
+        public async Task AddBookLiber(int IdUser, int IdBook,int flagLiber)
         {
             var l = Proverka(IdUser);
-            int f,p=0;
+            int f=0,p=0;
 
             if (l != null)
             {
-                f = BookCategory(IdUser, IdBook);
+                f = await BookCategory(IdUser, IdBook);
                 
                 if (f != 0)
                 {
                     switch (f)
                     {
                         case 1:
-                            p=RemoveBookEnd(IdBook);
+                            p = await RemoveBookEnd(IdBook, IdUser);
                             break;
 
                         case 2:
-                            p=RemoveBookFinish(IdBook);
+                            p = await RemoveBookFinish(IdBook, IdUser);
                             break;
 
                         case 3:
-                            p=RemoveBookNow(IdBook);
+                            p = await RemoveBookNow(IdBook, IdUser);
                             break;
 
                         case 4:
-                            p=RemoveBookWant(IdBook);
+                            p = await RemoveBookWant(IdBook, IdUser);
                             break;
 
                         default:
@@ -145,19 +169,19 @@ namespace BOOKcheck.Managers.Liber
                 switch (flagLiber)
                 {
                     case 1:
-                        AddBookEnd(IdUser, IdBook, p);
+                      await  AddBookEnd(IdUser, IdBook, p,f);
                         break;
 
                     case 2:
-                        AddBookFinish(IdUser, IdBook, p);
+                      await  AddBookFinish(IdUser, IdBook, p,f);
                         break;
 
                     case 3:
-                        AddBookNow(IdUser, IdBook, p);
+                      await AddBookNow(IdUser, IdBook, p);
                         break;
 
                     case 4:
-                        AddBookWant(IdUser, IdBook, p);
+                      await  AddBookWant(IdUser, IdBook, p);
                         break;
 
                     default:
@@ -169,86 +193,90 @@ namespace BOOKcheck.Managers.Liber
         }
 
 
-        //добавить стрпницу
-        public int AddPage(int numberPage)
+        //добавить страницу
+        public async Task<int> AddPage(int numberPage)
         {
             Page page = new Page();
             page.Number = numberPage;
-            context.Page.Add(page);
-            context.SaveChanges();
+            await context.Page.AddAsync(page);
+            await context.SaveChangesAsync();
 
             return page.Id;
         }
 
         //добавить книгу в NowRead
-        public void AddBookNow(int IdUser, int IdBook,int numberPage)
+        public async Task AddBookNow(int IdUser, int IdBook,int numberPage)
         {
-            int idPage = AddPage(numberPage);
+            int idPage = await AddPage(numberPage);
 
             NowRead now = new NowRead();
             now.IdBook = IdBook;
             now.IdPage = idPage;
             now.IdUserLiber = IdUser;
-            now.Page = context.Page.FirstOrDefault(p => p.Id == idPage);
-            now.Book = context.Book.FirstOrDefault(b => b.Id == IdBook);
-            now.UserLiber = context.UserLiber.FirstOrDefault(u => u.Id == IdUser);
+            now.Page = await context.Page.FirstOrDefaultAsync(p => p.Id == idPage);
+            now.Book = await context.Book.FirstOrDefaultAsync(b => b.Id == IdBook);
+            now.UserLiber = await context.UserLiber.FirstOrDefaultAsync(u => u.Id == IdUser);
 
-            context.NowRead.Add(now);
-            context.SaveChanges();
+            await context.NowRead.AddAsync(now);
+            await context.SaveChangesAsync();
 
         }
 
         //добавить книгу в FinishRead
-        public void AddBookFinish(int IdUser, int IdBook, int numberPage)
+        public async Task AddBookFinish(int IdUser, int IdBook, int numberPage,int rate)
         {
-            int idPage = AddPage(numberPage);
+            int idPage = await AddPage(numberPage);
+
+            await ChangeOurRating(IdBook,rate);
 
             FinishRead finish = new FinishRead();
             finish.IdBook = IdBook;
             finish.IdPage = idPage;
             finish.IdUserLiber = IdUser;
-            finish.Page = context.Page.FirstOrDefault(p => p.Id == idPage);
-            finish.Book = context.Book.FirstOrDefault(b => b.Id == IdBook);
-            finish.UserLiber = context.UserLiber.FirstOrDefault(u => u.Id == IdUser);
+            finish.Page = await context.Page.FirstOrDefaultAsync(p => p.Id == idPage);
+            finish.Book = await context.Book.FirstOrDefaultAsync(b => b.Id == IdBook);
+            finish.UserLiber = await context.UserLiber.FirstOrDefaultAsync(u => u.Id == IdUser);
 
-            context.FinishRead.Add(finish);
-            context.SaveChanges();
+            await context.FinishRead.AddAsync(finish);
+            await context.SaveChangesAsync();
 
         }
 
         //добавить книгу в WantRead
-        public void AddBookWant(int IdUser, int IdBook, int numberPage)
+        public async Task AddBookWant(int IdUser, int IdBook, int numberPage)
         {
-            int idPage = AddPage(numberPage);
+            int idPage = await AddPage(numberPage);
 
             WantRead want = new WantRead();
             want.IdBook = IdBook;
             want.IdPage = idPage;
             want.IdUserLiber = IdUser;
-            want.Page = context.Page.FirstOrDefault(p => p.Id == idPage);
-            want.Book = context.Book.FirstOrDefault(b => b.Id == IdBook);
-            want.UserLiber = context.UserLiber.FirstOrDefault(u => u.Id == IdUser);
+            want.Page = await context.Page.FirstOrDefaultAsync(p => p.Id == idPage);
+            want.Book = await context.Book.FirstOrDefaultAsync(b => b.Id == IdBook);
+            want.UserLiber = await context.UserLiber.FirstOrDefaultAsync(u => u.Id == IdUser);
 
-            context.WantRead.Add(want);
-            context.SaveChanges();
+            await context.WantRead.AddAsync(want);
+            await context.SaveChangesAsync();
 
         }
 
         //добавить книгу в EndRead
-        public void AddBookEnd(int IdUser, int IdBook, int numberPage)
+        public async Task AddBookEnd(int IdUser, int IdBook, int numberPage,int rate)
         {
-            int idPage = AddPage(numberPage);
+            int idPage = await AddPage(numberPage);
+
+            await ChangeOurRating(IdBook, rate);
 
             EndRead end = new EndRead();
             end.IdBook = IdBook;
             end.IdPage = idPage;
             end.IdUserLiber = IdUser;
-            end.Page = context.Page.FirstOrDefault(p => p.Id == idPage);
-            end.Book = context.Book.FirstOrDefault(b => b.Id == IdBook);
-            end.UserLiber = context.UserLiber.FirstOrDefault(u => u.Id == IdUser);
+            end.Page = await context.Page.FirstOrDefaultAsync(p => p.Id == idPage);
+            end.Book = await context.Book.FirstOrDefaultAsync(b => b.Id == IdBook);
+            end.UserLiber = await context.UserLiber.FirstOrDefaultAsync(u => u.Id == IdUser);
 
-            context.EndRead.Add(end);
-            context.SaveChanges();
+            await context.EndRead.AddAsync(end);
+            await context.SaveChangesAsync();
 
         }
 
@@ -261,54 +289,84 @@ namespace BOOKcheck.Managers.Liber
         }
 
         //поиск где находится книга возвращает флаг флаги смотреть в классе UserLiber
-        public int BookCategory(int IdUser, int IdBook)
+        public async Task<int> BookCategory(int IdUser, int IdBook)
         {
             int f = 0;
 
-            var bc = Proverka(IdUser);
+            var userLib = Proverka(IdUser);
 
-            if(bc!=null)
-                if (bc.FirstOrDefault(t => t.EndRead.Any(e => e.IdBook == IdBook)) != null)
+            if(userLib!=null)
+                if (await userLib.FirstOrDefaultAsync(t => t.EndRead.Any(e => e.IdBook == IdBook)) != null)
                     f = 1;
                 else
-                    if (bc.FirstOrDefault(t => t.FinishRead.Any(e => e.IdBook == IdBook)) != null)
+                    if (await userLib.FirstOrDefaultAsync(t => t.FinishRead.Any(e => e.IdBook == IdBook)) != null)
                         f = 2;
                     else
-                        if (bc.FirstOrDefault(t => t.NowRead.Any(e => e.IdBook == IdBook)) != null)
+                        if (await userLib.FirstOrDefaultAsync(t => t.NowRead.Any(e => e.IdBook == IdBook)) != null)
                             f = 3;
                         else
-                            if (bc.FirstOrDefault(t => t.WantRead.Any(e => e.IdBook == IdBook)) != null)
+                            if (await userLib.FirstOrDefaultAsync(t => t.WantRead.Any(e => e.IdBook == IdBook)) != null)
                                 f = 4;
 
             return f;
         }
 
         //изменение номера страницы
-        public void ChangePageNumber(int IdBook, int IdLiber, int PageNumber)
+        public async Task ChangePageNumber(int IdBook, int IdLiber, int PageNumber)
         {
-            var UserPageNuber = context.EndRead.FirstOrDefault(r => r.IdUserLiber == IdLiber && r.IdBook == IdBook);
+            var UserPageNuber = await context.NowRead.Where(r => r.IdUserLiber == IdLiber && r.IdBook == IdBook).Include(pg => pg.Page).SingleOrDefaultAsync();
 
             if (UserPageNuber != null)
             {
                 UserPageNuber.Page.Number = PageNumber;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
         //изменение рейтинга
-        public void ChangeOurRating(int IdBook, double appraisal)
+        public async Task ChangeOurRating(int IdBook, double appraisal)
         {
-            var UserRating = context.Book.FirstOrDefault(r => r.Id == IdBook);
+            var UserRating = await context.Book.Where(r => r.Id == IdBook).Include(st => st.Rating).SingleOrDefaultAsync();
 
             if (UserRating != null)
             {
+
+
                 if (UserRating.Rating.OurRating == 0)
                     UserRating.Rating.OurRating = appraisal;
                 else
                     UserRating.Rating.OurRating = ((UserRating.Rating.OurRating + appraisal) / 2);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
+
+
+        public async Task<ICollection<UserLiber>> GetUserLib(int choice, string userLogin)
+        {
+
+
+            var user = await context.Person.FirstOrDefaultAsync(st => st.Login == userLogin);
+
+            switch (choice)
+            {
+                case 1:
+                    return await GetAllNow(user.Id);
+
+                case 2:
+                    return await GetAllFinish(user.Id);
+
+                case 3:
+                    return await GetAllWant(user.Id);
+
+                case 4:
+                    return await GetAllEnd(user.Id);
+
+            }
+            return null;
+
+
+        }
+
 
         //вывод
         public async Task<ICollection<UserLiber>> GetAllEnd(int IdUser)
@@ -350,6 +408,8 @@ namespace BOOKcheck.Managers.Liber
                                    .Include(end => end.WantRead).ThenInclude(end => end.Page).ToListAsync();
         }
 
+
+       
 
     }
 }

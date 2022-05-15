@@ -1,0 +1,165 @@
+﻿@model BookModel
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/css/bookstr.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>Login</title>
+
+    @if (Context.Request.Cookies["bookCookie"] != null)
+    {  <style> .auth { display: normal; } </style> }
+    @if (Context.Request.Cookies["bookCookie"] == null)
+    {  <style> .auth { display: none; } </style> }
+
+</head>
+
+<body class="color1">
+    <div class="login">
+        
+        <div class="container">
+            <h1 class="mt-5" style="text-align:center">Страница книги</h1>
+            <div class="block mt-5" style="height:100%">
+                <div class="info" style="height:max-content">
+                <nav>
+                    <ul>
+                        <li style="height: auto;color:black">
+
+                            <div>
+                                <img src="~/images/Alice.jpg" align="left" height="240" width="145"  />
+                                    
+                                    <p id="bookName"> @Model.Book.Name</p> 
+                                    <p> @Model.Book.Author.Name</p>
+                                    <p>Рейтинг: @Model.Book.Rating.WorldRating</p>
+                                    <p>Год: @Model.Book.Year</p> 
+                                    <p>Жанр: @Model.Book.Genre.Name</p>
+                               
+                            </div>
+                           
+                            <div>
+                                <label for="customRange3" class="form-label">Описание книги: <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                                                                                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+                                                                                                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
+                                                                                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+                                                                                                    officia deserunt mollit anim id est laborum. </label>
+                            </div>
+                             @if(Context.Request.Cookies["bookCookie"] != null) { 
+                            <br />
+                            <div>
+
+                                @switch (Model.LibOption)
+                                {
+
+                                    case 3:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы читаете эту книгу </label>
+                                        @using (Html.BeginForm("newPage", "Book", FormMethod.Post))
+                                        {
+                                            <input name="bookID2" id="bookID2" style="display:none" type="text"  value="@Model.Book.Id">
+
+                                            <input id="newPage" name="newPage" type="Text" placeholder="Страница" required />
+                                            <input type="submit" value="Новая страница" />
+                                        }
+                                        break;
+
+                                    case 2:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы уже прочитали эту книгу </label>
+                                        break;
+
+                                    case 4:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы планируете прочитать эту книгу</label>
+                                        break;
+
+                                    case 1:
+                                        <label for="customRange3" class="form-label" style="font-weight:bold">Вы бросили читать эту книгу</label>
+                                        break;
+
+                                    default: break;
+                                }
+                            </div>
+                            }
+
+                            <br />
+                            <div style="margin-top:50px" >
+                                @if (Context.Request.Cookies["bookCookie"] == null)
+                                {
+                                    <form style="border: 1px solid #000000;margin:auto;margin-bottom: 4px;border-radius: 3px;" action="https://localhost:44384/Authorization">
+                                        <a>Чтобы воспользоваться дополнительными фунциями сайта вы можете войти в свою библеотеку <button style="width: 15%; margin-top: 5px; margin-bottom: 3px;margin-left: 10px; border: 3px solid #000000;" type="submit" class="btn btn-primary">Войти</button></a>
+                                    </form>
+                                }
+
+                                <div class="auth">
+                                    @using (Html.BeginForm("SetUserLibBook", "Book", FormMethod.Post))
+                                    {
+                                        <input name="bookId" id="bookId" style="display:none" type="text" size="4" value="@Model.Book.Id">
+                                        <label for="customRange3" class="form-label">Добавить в свою библиотеку:</label>
+
+                                        <select name="libOption" id="libOption" class="form-select" aria-label="Default select example" onchange="getSelect(this)">
+
+                                            <option selected hidden value="0"> Выбор списка </option>
+
+                                            <option id="1" value="1">Читаю</option>
+                                            <option id="2" value="2">Прочитал</option>
+                                            <option id="3" value="3">Хочу прочитать</option>
+                                            <option id="4" value="4">Перестал читать</option>
+                                        </select>
+
+                                        <input name="page" id="page" style="width: 15%; margin-top: 3px; display:none" type="number" min="0" size="4" placeholder="Номер страницы">
+
+                                        <input name="rate" id="rate" style="width: 15%; margin-top: 3px; display:none" type="number" min="0" max="10" size="4" placeholder="Рейтинг">
+
+                                        <button style="width: 100%; margin-top:5px" type="submit" class="btn btn-primary">Добавить</button>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    var select = document.querySelector('select');
+    var page = document.getElementById("page");
+    var rate = document.getElementById("rate");
+
+   function getSelect(select) {
+   
+        var indexSelected = select.selectedIndex,
+            option = select.querySelectorAll('option')[indexSelected];
+        var selectedId = option.getAttribute('id');
+
+       if (selectedId == '1') {
+            page.style.display = "block";
+            rate.style.display = "none";
+       }
+
+       if (selectedId == '2') {
+           page.style.display = "none";
+           rate.style.display = "block";
+       }
+
+       if (selectedId == '3') {
+           page.style.display = "none";
+           rate.style.display = "none";
+       }
+
+       if (selectedId == '4') {
+           page.style.display = "block";
+           rate.style.display = "block";
+       }
+
+       page.innerHTML = '';
+       rate.innerHTML = '';
+    };
+
+
+</script>

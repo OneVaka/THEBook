@@ -1,4 +1,4 @@
-﻿@model ICollection<BOOKcheck.Storage.Entity.Book>
+﻿
 
 
 <html lang="en">
@@ -25,59 +25,123 @@
             <div class="search-wrapper">
                 <div class="change">
                     <ul class="list-group">
+                        @using (Html.BeginForm("FindBookBySort", "Search", FormMethod.Get))
+                        {
+                            <div class="select">
 
-                        <div class="select">
-                            @using (Html.BeginForm("FindGenre", "Search", FormMethod.Post))
-                            {
-                                <label for="customRange3" class="form-label">Сортировка по:</label>
+                                <label for="customRange3" class="form-label">Выбор жанра:</label>
 
                                 <select name="genreID" id="genreID" class="form-select" aria-label="Default select example">
                                     <option selected value="0"> Любой жанр </option>
-                                    <option value="1">Жанр 1</option>
-                                    <option value="2">Жанр 2</option>
-                                    <option value="3">Жанр 3</option>
+                                    <option value="1">   Триллер           </option>
+                                    <option value="2">   Научная фантастика</option>    
+                                    <option value="3">   Детектив            </option>
+                                    <option value="4">   Сказки            </option>
+                                    <option value="5">   Роман            </option>
+                                    <option value="6">   Приключения            </option>
+                                    <option value="7">   Повесть            </option>
+                                    <option value="8">   Новелла            </option>
+                                    <option value="9">   Поэма            </option>
+                                    <option value="10">  Драма            </option>
+                                    <option value="11">  Классическая проза            </option>
+
+
                                 </select>
-                                <p style="display:none"> <input type="checkbox" name="a" value="">Любой жанр</p>
-                                <button style="width: 100%; margin-top:5px" type="submit" class="btn btn-primary">Искать</button>
-                            }
-                        </div>
+                               
+                            </div>
 
-                        <div class="select" style="margin-top: 5px;">
-                            <hr />
-                            @using (Html.BeginForm("FindAutor", "Search", FormMethod.Post))
-                            {
+                            <div class="select" style="margin-top: 5px;">
+                                <hr />
 
-                                <input id="name" name="name" type="text" class="form-control" placeholder="Автор" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <label for="customRange3" class="form-label">Имя автора:</label>
+                                <input id="autorName" name="autorName" type="text" class="form-control" placeholder="Автор" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
-                                <p style="display:none"><input type="checkbox" name="a" value="">Любой автор</p>
-                                <button style="width: 100%; margin-top:5px" type="submit" class="btn btn-primary">Искать</button>
-                            }
 
-                        </div>
+                            </div>
 
-                        <div class="range">
-                            <hr />
-                            @using (Html.BeginForm("FindRating", "Search", FormMethod.Post))
-                            {
+                            <div class="range">
+                                <hr />
+
 
                                 <label style="margin-top: 0px;" for="customRange3" class="form-label">Рейтинг:</label>
                                 <p>
-                                    От <input name="rateDown" id="rateDown" style="width: 50%" type="text" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    До <input name="rateUpper" id="rateUpper" style="width: 50%" type="text" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    От <input name="rateDown" id="rateDown" min="0" max="10" style="width: 50%" type="number" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    До <input name="rateUpper" id="rateUpper" min="0" max="10" style="width: 50%" type="number" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2">
                                 </p>
-                                <label for="customRange3" class="form-label">Сортировать:</label>
-                                <p><input type="radio" name="a1" value="1">По возрастанию</p>
-                                <p><input type="radio" name="a1" value="2">По убыванию</p>
-                                <p><input type="radio" name="a1" value="0">Любой рейтинг</p>
-                                <button style="width: 100%;" type="submit" class="btn btn-primary">Искать</button>
-                            }
-                        </div>
+                                
+                                
 
+
+                                <label for="customRange3" class="form-label">Сортировать:</label>
+                                <p><input type="radio" name="sortVal" value="1">По возрастанию</p>
+                                <p><input type="radio" name="sortVal" value="2">По убыванию</p>
+                                <p><input type="radio" name="sortVal" value="0" checked>Любой рейтинг</p>
+                                <button style="width: 100%;" type="submit" class="btn btn-primary">Искать</button>
+
+                            </div>
+                        }
+
+                        <!-- поиск по отдельности -->
+
+                        <!--
+
+    <div class="select">
+        @using (Html.BeginForm("FindGenre", "Search", FormMethod.Get))
+        {
+            <label for="customRange3" class="form-label">Сортировка по:</label>
+
+            <select name="genreID" id="genreID" class="form-select" aria-label="Default select example">
+                <option selected value="0"> Любой жанр </option>
+                <option value="1">Триллер</option>
+                <option value="2">Научная фантастика</option>
+                <option value="3">Жанр 3</option>
+            </select>
+            <p style="display:none"> <input type="checkbox" name="a" value="">Любой жанр</p>
+            <button style="width: 100%; margin-top:5px" type="submit" class="btn btn-primary">Искать</button>
+        }
+    </div>
+
+    <div class="select" style="margin-top: 5px;">
+        <hr />
+        @using (Html.BeginForm("FindAutor", "Search", FormMethod.Get))
+        {
+
+            <input id="name" name="name" type="text" class="form-control" placeholder="Автор" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+            <p style="display:none"><input type="checkbox" name="a" value="">Любой автор</p>
+            <button style="width: 100%; margin-top:5px" type="submit" class="btn btn-primary">Искать</button>
+        }
+
+    </div>
+
+    <div class="range">
+        <hr />
+        @using (Html.BeginForm("FindRating", "Search", FormMethod.Get))
+        {
+
+            <label style="margin-top: 0px;" for="customRange3" class="form-label">Рейтинг:</label>
+            <p>
+                От <input name="rateDown" id="rateDown" min="0" max="10" style="width: 50%" type="number" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                До <input name="rateUpper" id="rateUpper" min="0" max="10" style="width: 50%" type="number" class="form-control" placeholder="10" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            </p>
+            <button style="width: 100%;" type="submit" class="btn btn-primary">Искать</button>
+        }
+
+        @using (Html.BeginForm("FindSort", "Search", FormMethod.Get))
+        {
+            <label for="customRange3" class="form-label">Сортировать:</label>
+            <p><input type="radio" name="a1" value="1">По возрастанию</p>
+            <p><input type="radio" name="a1" value="2">По убыванию</p>
+            <p><input type="radio" name="a1" value="0">Любой рейтинг</p>
+            <button style="width: 100%;" type="submit" class="btn btn-primary">Искать</button>
+        }
+        </div>
+    -->
                     </ul>
                 </div>
                 <div class="spisok">
 
-                    @using (Html.BeginForm("FindBook", "Search", FormMethod.Post))
+                    @using (Html.BeginForm("FindBook", "Search", FormMethod.Get))
                     {
 
                         <div class="input-group mb-3" style="margin-top: 10px; padding: 10px;">
@@ -91,42 +155,9 @@
                             <div class="select" style="margin-top: 10px; list-style: none; padding: 10px; border: 1px solid #ccc; width: 100%; height:max-content; border-radius:10px; ">
 
                                 <li>
-                                    <table style="width: 100%">
-                                        <tr style=" height:max-content; border-bottom: 1px solid #ccc">
-                                            <th style="width: 30%;padding-left: 15px">Название</th>
-                                            <th style="width: 10%">Жанр</th>
-                                            <th style="width: 10%">Год</th>
-                                            <th style="width: 20%">Автор</th>
-                                            <th style="width: 15%; text-align: center">Пользовательский<br /> рейтинг</th>
-                                            <th style="width: 15%; text-align: center">Мировой<br /> рейтинг</th>
 
-                                        </tr>
+                                    @await Html.PartialAsync("_GetBookTable")
 
-                                         @if (Model.Count == 0)
-                                         {<tr >
-
-                                           <td colspan="6" style="font-size:18px; padding-left: 15px">Ничего не было найдено!</td>
-
-                                          </tr>
-                                          }
-
-                                       @foreach (var book in Model)
-                                       {
-                                       
-                                            <tr style="height:max-content">
-                                           @if (book.Name != null)
-                                           {
-                                               <td style="padding-left: 15px">@book.Name</td>
-                                               <td>@book.Genre.Name</td>
-                                               <td>@book.Year</td>
-                                               <td>@book.Author.Name</td>
-                                               <td style="text-align:center">@book.Rating.OurRating</td>
-                                               <td style="text-align: center">@book.Rating.WorldRating</td>
-                                            }
-                                            </tr>
-                                        }
-
-                                        </table>
                                 </li>
 
                                 <div style="display:none">

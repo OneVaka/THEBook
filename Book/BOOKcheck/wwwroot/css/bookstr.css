@@ -1,0 +1,63 @@
+.color1 {
+    background-color: white;
+}
+
+.menu {
+    display: flex;
+    list-style-type: none;
+    padding-top: 30px;
+    padding-left: 10px;
+}
+
+    .menu li {
+        padding: 0;
+        margin-right: 30px;
+    }
+
+        .menu li a {
+            text-decoration: none;
+            color: #000;
+        }
+
+.block {
+    display: flex;
+}
+
+.select {
+    max-width: 300px;
+    padding: 10px;
+    height: 500px;
+    background-color: white;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+}
+
+.info {
+    width: 700px;
+    padding: 10px;
+    height: 500px;
+    width: 1000px;
+    background-color: white;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+    overflow: auto;
+    margin-left: 10px;
+}
+
+    .info ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .info li {
+        width: 100%;
+        height: 60px;
+        background-color: white;
+        color: #fff;
+        border: 3px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        list-style: none;
+        padding: 10px;
+    }
